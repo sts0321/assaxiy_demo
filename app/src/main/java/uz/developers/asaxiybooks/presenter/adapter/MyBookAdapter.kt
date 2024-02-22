@@ -30,7 +30,7 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
                 binding.bookName.text = bookName
                 binding.authorName.text = bookAuthor
                 binding.bookPicture.setImageResource(bookPicture)
-                if(type=="pdf"){
+                if(type =="pdf"){
                     binding.audioBook.visibility  = View.GONE
                     binding.audioBookText.visibility = View.GONE
                 }

@@ -4,7 +4,9 @@ data class MyBooksData(
     val  id:String,
     val bookName:String,
     val bookAuthor:String,
-    val bookPicture:Int,
+    val bookSize:String,
+    val bookPicture:List<String>,
     val descriptions:String,
-    val type:String
+    val type:String,
+    val file:String
 )
