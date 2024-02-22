@@ -13,14 +13,20 @@ import com.example.nasiyaapp.utils.myLog
 import com.github.barteksc.pdfviewer.source.DocumentSource
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
+import dagger.hilt.android.AndroidEntryPoint
 import uz.developers.asaxiybooks.R
+import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.databinding.ScreenPdfreaderBinding
 import java.io.File
 import java.net.URI
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
     private val binding by viewBinding(ScreenPdfreaderBinding::bind)
     private val navArgs=navArgs<ReadBookScreenArgs>()
+    private val bookData by lazy { navArgs.value.book }
+    @Inject private lateinit var shar:Pref
 //    private val name: by lazy { }
 //    private val link by lazy { requireArguments().getString("link","").toString() }
 
@@ -31,11 +37,12 @@ class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
     }
 
     fun init(){
-        binding.bookName.text=navArgs.value.name
-        val book = File.createTempFile("Book", "pdf")
-        Firebase.storage.getReferenceFromUrl(navArgs.value.link)
+        binding.bookName.text=bookData.bookName
+        val book = File.createTempFile(bookData.file, "pdf")
+        Firebase.storage.getReferenceFromUrl(bookData.file)
             .getFile(book)
             .addOnSuccessListener {
+                shar.setBookInfo(bookId = bookData.id, bookLink = bookData.file)
                 Log.d("TTT", "OnSuccess")
                 binding.pdfReader
                     .fromFile(book)

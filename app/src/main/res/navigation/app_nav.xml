@@ -33,10 +33,7 @@
         android:name="uz.developers.asaxiybooks.presenter.screen.ReadBookScreen"
         android:label="ReadBookScreen" >
         <argument
-            android:name="name"
-            app:argType="string" />
-        <argument
-            android:name="link"
-            app:argType="string" />
+            android:name="book"
+            app:argType="uz.developers.asaxiybooks.data.model.MyBooksData" />
     </fragment>
 </navigation>
