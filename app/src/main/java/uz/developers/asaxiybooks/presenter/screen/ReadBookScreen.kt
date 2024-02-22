@@ -26,7 +26,7 @@ class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
     private val binding by viewBinding(ScreenPdfreaderBinding::bind)
     private val navArgs=navArgs<ReadBookScreenArgs>()
     private val bookData by lazy { navArgs.value.book }
-    @Inject private lateinit var shar:Pref
+    @Inject  lateinit var shar:Pref
 //    private val name: by lazy { }
 //    private val link by lazy { requireArguments().getString("link","").toString() }
 
