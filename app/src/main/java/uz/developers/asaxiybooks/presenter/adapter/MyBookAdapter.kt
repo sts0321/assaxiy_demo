@@ -13,6 +13,8 @@ import uz.developers.asaxiybooks.databinding.ItemMybookBinding
 
 class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
 
+    var onClickItem:((MyBooksData)->Unit)?=null
+
 
     object MyDif: DiffUtil.ItemCallback<MyBooksData>() {
         override fun areItemsTheSame(oldItem: MyBooksData, newItem: MyBooksData): Boolean {
@@ -36,7 +38,11 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
 //                    binding..visibility  = View.GONE
 //                    binding.audioBookText.visibility = View.GONE
                 }
+                binding.root.setOnClickListener {
+                    onClickItem?.invoke(this)
+                }
             }
+
         }
 
     }

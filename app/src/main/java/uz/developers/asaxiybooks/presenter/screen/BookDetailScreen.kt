@@ -31,6 +31,12 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
         super.onViewCreated(view, savedInstanceState)
        initInfo()
         initButton()
+        if (shar.getBookLink(bookData.id)!=""){
+            binding.download.text="Okish"
+            binding.download.setOnClickListener {
+                findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(bookData))
+            }
+        }
     }
     fun initInfo(){
         Glide.with(binding.root.context)
@@ -49,20 +55,22 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
         binding.download.setOnClickListener {
             binding.seekBar.visibility=View.VISIBLE
             binding.progres.visibility=View.VISIBLE
-            binding.download.visibility=View.GONE
-            val book = File.createTempFile(bookData.bookName, "pdf")
+            binding.download.visibility=View.INVISIBLE
+            val book = File.createTempFile(bookData.bookName, ".pdf")
             Firebase.storage.getReferenceFromUrl(bookData.file)
                 .getFile(book)
                 .addOnSuccessListener {
-                    shar.setBookInfo(bookId = bookData.id, bookLink = bookData.file)
+                    book.parent.myLog()
+                    shar.setBookInfo(bookId = bookData.id, bookLink = "${book.parent}/${book.name}")
                     Log.d("TTT", "OnSuccess")
 
                     binding.apply {
                         seekBar.visibility=View.GONE
                         progres.visibility=View.GONE
                         binding.download.visibility=View.VISIBLE
+                        binding.download.text="Okish"
                         binding.download.setOnClickListener {
-
+                            findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(bookData))
                         }
                     }
                 }

@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_homeScreen_to_bookDetailScreen"
             app:destination="@id/bookDetailScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_readBookScreen"
+            app:destination="@id/readBookScreen" />
     </fragment>
     <fragment
         tools:layout="@layout/screen_intro"

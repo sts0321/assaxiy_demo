@@ -29,23 +29,28 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                 query.forEach {
                     index++
                     val name=(it.data.getOrDefault("name","")?:"").toString()
-                    val description=(it.data.getOrDefault("description","")?:"").toString()
-                    val coverImage=it.data.getOrDefault("coverImage", arrayListOf("")) as List<String>
-                    val author=(it.data.getOrDefault("author", "")?:"Ali").toString()
-                    val totalSize=(it.data.getOrDefault("total size","10 mb")?:"12 mb").toString()
-                    val file=(it.data.getOrDefault("filePath","")?:"").toString()
-                    data.add(
-                        MyBooksData(
-                            id=it.id,
-                            bookName = name,
-                            bookAuthor = author,
-                            bookSize = totalSize,
-                            bookPicture =coverImage,
-                            descriptions =description,
-                            type = type1,
-                            file = file
+
+                    if (pref.getBookLink(it.id)!=""){
+                        val description=(it.data.getOrDefault("description","")?:"").toString()
+                        val coverImage=it.data.getOrDefault("coverImage", arrayListOf("")) as List<String>
+                        val author=(it.data.getOrDefault("author", "")?:"Ali").toString()
+                        val totalSize=(it.data.getOrDefault("total size","10 mb")?:"12 mb").toString()
+                        val file=(it.data.getOrDefault("filePath","")?:"").toString()
+                        data.add(
+                            MyBooksData(
+                                id=it.id,
+                                bookName = name,
+                                bookAuthor = author,
+                                bookSize = totalSize,
+                                bookPicture =coverImage,
+                                descriptions =description,
+                                type = type1,
+                                file = file
+                            )
                         )
-                    )
+                    }
+
+
                     if (index==size){
                         trySend(Result.success(data))
                     }

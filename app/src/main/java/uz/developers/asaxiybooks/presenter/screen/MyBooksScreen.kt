@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,8 +26,7 @@ class MyBooksScreen:Fragment(R.layout.screen_mybooks) {
     private val viewModel:MyBooksVM by viewModels<MyBooksVMImpl>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.rec.adapter = adapter
-        binding.rec.layoutManager = LinearLayoutManager(requireContext())
+        initAdapter()
         initViewModel()
     }
     private fun initViewModel(){
@@ -38,5 +38,12 @@ class MyBooksScreen:Fragment(R.layout.screen_mybooks) {
                 Toast.makeText(requireContext(),it.message?:"Error!",Toast.LENGTH_SHORT).show()
             }
         }.flowWithLifecycle(lifecycle).launchIn(lifecycleScope)
+    }
+    private fun initAdapter(){
+        binding.rec.adapter = adapter
+        binding.rec.layoutManager = LinearLayoutManager(requireContext())
+        adapter.onClickItem={
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
+        }
     }
 }
