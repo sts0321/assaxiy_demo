@@ -29,8 +29,8 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
         fun bind(){
             getItem(adapterPosition).apply {
                 binding.bookName.text = bookName
-                binding.authorName.text = bookAuthor
-                Glide.with(binding.root.context).load(bookPicture[0]).into(binding.bookPicture)
+                binding.bookAuthor.text = bookAuthor
+                Glide.with(binding.root.context).load(bookPicture[0]).into(binding.imgBook)
 //                binding.bookPicture.setImageResource(bookPicture)
                 if(type =="pdf"){
 //                    binding..visibility  = View.GONE

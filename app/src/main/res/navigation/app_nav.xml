@@ -7,21 +7,46 @@
 
     <fragment
         android:id="@+id/splashScreen"
+        tools:layout="@layout/screen_splash"
         android:name="uz.developers.asaxiybooks.presenter.screen.SplashScreen"
         android:label="SplashScreen" >
         <action
-            android:id="@+id/action_splashScreen_to_introScreen"
-            app:destination="@id/introScreen" />
-        <action
             android:id="@+id/action_splashScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashScreen_to_introScreen"
+            app:destination="@id/introScreen"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/introScreen"
-        android:name="uz.developers.asaxiybooks.presenter.screen.IntroScreen"
-        android:label="IntroScreen" />
-    <fragment
+        tools:layout="@layout/screen_home"
         android:id="@+id/homeScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.HomeScreen"
-        android:label="HomeScreen" />
+        android:label="HomeScreen" >
+        <action
+            android:id="@+id/action_homeScreen_to_readBookScreen"
+            app:destination="@id/readBookScreen" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/screen_intro"
+        android:id="@+id/introScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.IntroScreen"
+        android:label="IntroScreen" >
+        <action
+            android:id="@+id/action_introScreen_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/introScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/readBookScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.ReadBookScreen"
+        android:label="ReadBookScreen" >
+        <argument
+            android:name="book"
+            app:argType="uz.developers.asaxiybooks.data.model.MyBooksData" />
+    </fragment>
 </navigation>
