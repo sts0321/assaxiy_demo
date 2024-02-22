@@ -22,6 +22,7 @@ class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
             .swipeHorizontal(false)
             .enableDoubletap(true)
             .defaultPage(0)
-            .load();
+            .load()
+
     }
 }
