@@ -1,4 +1,4 @@
-package uz.b7.chessonline.app
+package uz.developers.asaxiybooks.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
