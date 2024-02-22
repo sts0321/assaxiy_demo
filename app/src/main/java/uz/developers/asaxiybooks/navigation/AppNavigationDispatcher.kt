@@ -1,5 +1,6 @@
 package com.example.uzummarketclient.navigation
 
+import android.os.Bundle
 import androidx.navigation.NavDirections
 import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
@@ -19,6 +20,10 @@ class AppNavigationDispatcher @Inject constructor() : AppNavigator, AppNavigatio
 
     override suspend fun navigateTo(directions: Int)= navigate {
         navigate(directions)
+    }
+
+    override suspend fun navigateTo(directions: Int, bundle: Bundle)=navigate {
+        navigate(directions,bundle)
     }
 
     override suspend fun popBackStack() = navigate {

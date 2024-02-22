@@ -30,6 +30,6 @@
         android:label="IntroScreen" />
     <fragment
         android:id="@+id/readBookScreen"
-        android:name="uz.developers.asaxiybooks.presenter.ReadBookScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.ReadBookScreen"
         android:label="ReadBookScreen" />
 </navigation>

@@ -1,4 +1,4 @@
-package uz.developers.asaxiybooks.presenter
+package uz.developers.asaxiybooks.presenter.screen
 
 import android.net.Uri
 import android.os.Bundle
@@ -17,7 +17,7 @@ class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.bookName.text=name
-        binding.pdfReader.fromUri(link.toUri())
+        binding.pdfReader.fromAsset(link)
             .enableSwipe(true) // allows to block changing pages using swipe
             .swipeHorizontal(false)
             .enableDoubletap(true)

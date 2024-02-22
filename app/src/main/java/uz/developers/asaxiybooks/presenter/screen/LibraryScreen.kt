@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,5 +45,9 @@ class LibraryScreen : Fragment(R.layout.screen_library) {
 
 
         }.flowWithLifecycle(lifecycle).launchIn(lifecycleScope)
+
+        adapter.setOnClickBook {
+
+        }
     }
 }

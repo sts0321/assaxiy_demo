@@ -82,7 +82,7 @@ class LibraryScreenAdapter : ListAdapter<CategoryBooksData, LibraryScreenAdapter
         holder.bind()
     }
 
-    fun setOnClickProduct(onClickProduct: ((MyBooksData) -> Unit)) {
+    fun setOnClickBook(onClickProduct: ((MyBooksData) -> Unit)) {
         this.onClickBook = onClickProduct
     }
 
