@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.presenter.viewModel.SplashViewModel
 import uz.developers.asaxiybooks.presenter.viewModel.impl.SplashViewModelImpl
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashScreen : Fragment(R.layout.screen_splash) {
     private val viewModel by viewModels<SplashViewModelImpl>()
 
