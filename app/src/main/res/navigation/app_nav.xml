@@ -19,9 +19,17 @@
     <fragment
         android:id="@+id/homeScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.HomeScreen"
-        android:label="HomeScreen" />
+        android:label="HomeScreen" >
+        <action
+            android:id="@+id/action_homeScreen_to_readBookScreen"
+            app:destination="@id/readBookScreen" />
+    </fragment>
     <fragment
         android:id="@+id/introScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.IntroScreen"
         android:label="IntroScreen" />
+    <fragment
+        android:id="@+id/readBookScreen"
+        android:name="uz.developers.asaxiybooks.presenter.ReadBookScreen"
+        android:label="ReadBookScreen" />
 </navigation>
