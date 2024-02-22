@@ -10,18 +10,18 @@
         android:name="uz.developers.asaxiybooks.presenter.screen.SplashScreen"
         android:label="SplashScreen" >
         <action
-            android:id="@+id/action_splashScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
-        <action
             android:id="@+id/action_splashScreen_to_introScreen"
             app:destination="@id/introScreen" />
+        <action
+            android:id="@+id/action_splashScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
     </fragment>
-    <fragment
-        android:id="@+id/homeScreen"
-        android:name="uz.developers.asaxiybooks.presenter.screen.HomeScreen"
-        android:label="HomeScreen" />
     <fragment
         android:id="@+id/introScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.IntroScreen"
         android:label="IntroScreen" />
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.HomeScreen"
+        android:label="HomeScreen" />
 </navigation>
