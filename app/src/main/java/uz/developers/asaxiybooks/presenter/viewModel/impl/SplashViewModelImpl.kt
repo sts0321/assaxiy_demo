@@ -21,7 +21,7 @@ class SplashViewModelImpl @Inject constructor(private val pref: Pref) : ViewMode
 
     private fun determineInitialScreen() {
         viewModelScope.launch {
-            delay(500)
+            delay(1500)
             val isFirstTime = pref.isFirstTime()
             if (isFirstTime) {
                 navigateToScreen.value = true
