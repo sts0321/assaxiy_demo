@@ -14,7 +14,7 @@ class PrefImpl @Inject constructor(
     }
 
     override fun isFirstTime(): Boolean {
-        return sharedPreferences.getBoolean("FIRST_TIME",false)
+        return sharedPreferences.getBoolean("FIRST_TIME",true)
     }
 
     override fun setFirstTime(isFirstTime: Boolean) {

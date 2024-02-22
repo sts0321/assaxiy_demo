@@ -33,8 +33,8 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
                 Glide.with(binding.root.context).load(bookPicture[0]).into(binding.bookPicture)
 //                binding.bookPicture.setImageResource(bookPicture)
                 if(type =="pdf"){
-                    binding.audioBook.visibility  = View.GONE
-                    binding.audioBookText.visibility = View.GONE
+//                    binding.audioBook.visibility  = View.GONE
+//                    binding.audioBookText.visibility = View.GONE
                 }
             }
         }
