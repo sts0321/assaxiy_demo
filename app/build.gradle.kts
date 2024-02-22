@@ -97,4 +97,6 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
+    // pdf view
+    implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
 }
