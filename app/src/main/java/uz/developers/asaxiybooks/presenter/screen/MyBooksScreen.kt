@@ -1,5 +1,6 @@
 package uz.developers.asaxiybooks.presenter.screen
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,9 +43,10 @@ class MyBooksScreen:Fragment(R.layout.screen_mybooks) {
     }
     private fun initAdapter(){
         binding.rec.adapter = adapter
-        binding.rec.layoutManager = LinearLayoutManager(requireContext())
+        binding.rec.layoutManager = GridLayoutManager(requireContext(),2)
         adapter.onClickItem={
             findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
         }
+
     }
 }

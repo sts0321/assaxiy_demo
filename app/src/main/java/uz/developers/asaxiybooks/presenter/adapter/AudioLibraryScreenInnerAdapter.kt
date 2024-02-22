@@ -11,8 +11,8 @@ import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.databinding.ItemLibraryBookBinding
 
-class LibraryScreenInnerAdapter :
-    ListAdapter<MyBooksData, LibraryScreenInnerAdapter.InnerHolder>(InnerDiffUtil) {
+class AudioLibraryScreenInnerAdapter :
+    ListAdapter<MyBooksData, AudioLibraryScreenInnerAdapter.InnerHolder>(InnerDiffUtil) {
     private var onClickProduct : ((MyBooksData) -> Unit)? = null
     private var time  = System.currentTimeMillis()
     inner class InnerHolder(private val binding: ItemLibraryBookBinding) :

@@ -1,6 +1,7 @@
 package uz.developers.asaxiybooks.presenter.screen
 
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -35,13 +36,13 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
     private fun controllerSound(audioResourceId: Int) {
         binding.playBtn.setOnClickListener {
             if (audioBook == null) {
-                audioBook = MediaPlayer.create(requireContext(), audioResourceId)
+                audioBook = MediaPlayer.create(requireContext(), Uri.parse("https://firebasestorage.googleapis.com/v0/b/asaxiy-books-92d0e.appspot.com/o/mp3%2FThe%20Kid%20Laroi%20-%20Stay%20(feat.%20Justin%20Bieber).mp3?alt=media&token=b5314992-3463-4550-bf12-c4de54bc786d"))
                 audioBook?.setOnCompletionListener {
                     stopPlaying()
                 }
 
                 audioBook?.setOnErrorListener { mp, what, extra ->
-                    stopPlaying()
+//                    stopPlaying()
                     true
                 }
                 audioBook?.setOnPreparedListener {
@@ -89,7 +90,7 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    stopPlaying()
+//                    stopPlaying()
                 }
             }
         }, 0)

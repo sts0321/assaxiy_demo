@@ -72,8 +72,10 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
             .get().addOnSuccessListener {
                 val size=it.size()
                 var index=0
+                "$size v".myLog()
                 it.forEach {
                     index++
+                    "$index vm".myLog()
                     data.add(Pair(it.id,it.data.getOrDefault("name","Ali").toString()))
                     if (size==index){
                         trySend(Result.success(data))
@@ -121,7 +123,7 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                             file = file
                         )
                     )
-                    "$index index".myLog()
+                    "$index indexV".myLog()
                     if (index==size){
                         trySend(Result.success(data))
                     }

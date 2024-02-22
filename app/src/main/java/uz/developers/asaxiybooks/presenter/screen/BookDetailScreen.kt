@@ -56,7 +56,7 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
             binding.seekBar.visibility=View.VISIBLE
             binding.progres.visibility=View.VISIBLE
             binding.download.visibility=View.INVISIBLE
-            val book = File.createTempFile(bookData.bookName, ".pdf")
+            val book = File.createTempFile(bookData.bookName, ".${bookData.type}")
             Firebase.storage.getReferenceFromUrl(bookData.file)
                 .getFile(book)
                 .addOnSuccessListener {

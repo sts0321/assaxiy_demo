@@ -14,11 +14,11 @@ class HomeScreen : Fragment(R.layout.screen_home) {
     private val binding by viewBinding(ScreenHomeBinding::bind)
     private val myBooksScreen=MyBooksScreen()
     private val libraryScreen=LibraryScreen()
-    private val audioBookScreen=AudioBookScreen()
+    private val audioLibraryScreen=AudioLibraryScreen()
     private val profileScreen=ProfileScreen()
     private lateinit var adapter:ViewPagerAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter=ViewPagerAdapter(this,myBooksScreen,libraryScreen,audioBookScreen, profileScreen)
+        adapter=ViewPagerAdapter(this,myBooksScreen,libraryScreen,audioLibraryScreen, profileScreen)
         binding.viewPager.adapter=adapter
         binding.viewPager.isUserInputEnabled=false
         initButtons()
