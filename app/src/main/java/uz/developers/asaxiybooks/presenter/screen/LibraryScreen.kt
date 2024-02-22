@@ -34,6 +34,5 @@ class LibraryScreen : Fragment(R.layout.screen_library) {
         rvListOuter.adapter = adapter
         rvListOuter.layoutManager = LinearLayoutManager(requireContext())
 
-
     }
 }
