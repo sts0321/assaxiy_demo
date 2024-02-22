@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/kitoblarim"
+        android:icon="@drawable/book"
     android:title="Kitoblarim"/>
     <item android:id="@+id/kutubhona"
+        android:icon="@drawable/books"
         android:title="Kutubhona"/>
     <item android:id="@+id/audio_kitoblar"
+        android:icon="@drawable/headphones"
         android:title="Audio kitoblar"/>
     <item android:id="@+id/profil"
+        android:icon="@drawable/user_profile"
         android:title="Profil"/>
 </menu>

@@ -11,6 +11,7 @@
         android:layout_height="64dp"
         android:background="#17E3E3E3"
         app:itemTextColor="@color/color_bottom_navigation"
+        app:itemIconTint="@color/color_bottom_navigation"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/home_menu" />

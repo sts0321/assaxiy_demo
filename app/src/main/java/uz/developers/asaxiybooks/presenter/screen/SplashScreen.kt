@@ -25,5 +25,6 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
                 findNavController().navigate(R.id.action_splashScreen_to_homeScreen)
             }
         }
+        //gjfodplfgnhjgfopsgkhfopdaofgijfodpsofgkhfopd[sfgokhfodp
     }
 }
