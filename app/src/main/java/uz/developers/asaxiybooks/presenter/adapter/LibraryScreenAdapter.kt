@@ -36,6 +36,7 @@ class LibraryScreenAdapter : ListAdapter<CategoryBooksData, LibraryScreenAdapter
             }
         }
 
+
         init {
             binding.rvListInner.adapter = adapter
             binding.rvListInner.layoutManager =
