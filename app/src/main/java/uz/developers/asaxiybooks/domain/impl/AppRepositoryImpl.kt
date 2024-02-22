@@ -1,5 +1,6 @@
 package uz.developers.asaxiybooks.domain.impl
 
+import com.example.nasiyaapp.utils.myLog
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
@@ -88,12 +89,13 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
             TypeEnum.PDF-> "pdf"
             TypeEnum.MP3->"mp3"
         }
+        "$categoryId categoryId".myLog()
         fireStore.collection("books")
             .whereEqualTo("categoryId",categoryId)
             .whereEqualTo("type",type1)
             .get().addOnSuccessListener { query->
                 val size=query.size()
-
+                "$size size1".myLog()
                 query.forEach {
                     index++
                     val name=(it.data.getOrDefault("name","")?:"").toString()
@@ -114,6 +116,7 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                             file = file
                         )
                     )
+                    "$index index".myLog()
                     if (index==size){
                         trySend(Result.success(data))
                     }
