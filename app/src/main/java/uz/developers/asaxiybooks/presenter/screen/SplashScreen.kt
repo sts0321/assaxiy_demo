@@ -35,6 +35,7 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
             .setDuration(1000).start()
 
 
+
         viewModel.navigateToScreen.observe(viewLifecycleOwner) { bool ->
             if(bool) {
                 findNavController().navigate(R.id.action_splashScreen_to_introScreen)
