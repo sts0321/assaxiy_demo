@@ -8,5 +8,5 @@ interface AppRepository {
     fun getAllBooks(type:TypeEnum):Flow<Result<List<MyBooksData>>>
 
     fun getCategoryBooks():Flow<Result<List<Pair<String,String>>>>
-    fun getBooksInCategory(categoryId:String):Flow<Result<List<MyBooksData>>>
+    fun getBooksInCategory(categoryId:String,type: TypeEnum):Flow<Result<List<MyBooksData>>>
 }
