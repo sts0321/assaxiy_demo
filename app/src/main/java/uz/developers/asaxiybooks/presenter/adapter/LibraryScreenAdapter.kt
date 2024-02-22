@@ -1,25 +1,23 @@
-package com.example.uzummarketclient.presenter.adapters
+package uz.developers.asaxiybooks.presenter.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nasiyaapp.utils.myLog
+import uz.developers.asaxiybooks.data.model.CategoryBooksData
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.databinding.ItemInnerListBooksBinding
-import uz.developers.asaxiybooks.presenter.adapter.LibraryScreenInnerAdapter
 
-class LibraryScreenAdapter : ListAdapter<MyBooksData, LibraryScreenAdapter.OuterHolder>(
+class LibraryScreenAdapter : ListAdapter<CategoryBooksData, LibraryScreenAdapter.OuterHolder>(
     OuterDiffUtil
 ) {
 
-    val favouriteLiveData = MutableLiveData<List<MyBooksData>>()
 
-    private var onClickProduct: ((MyBooksData) -> Unit)? = null
-    private var onClickCategory: ((MyBooksData) -> Unit)? = null
+    private var onClickBook: ((MyBooksData) -> Unit)? = null
+    private var onClickCategory: ((CategoryBooksData) -> Unit)? = null
     private var time = System.currentTimeMillis()
 
     inner class OuterHolder(val binding: ItemInnerListBooksBinding) :
@@ -34,7 +32,7 @@ class LibraryScreenAdapter : ListAdapter<MyBooksData, LibraryScreenAdapter.Outer
                 }
             }
             adapter.setOnClickProduct {
-                onClickProduct?.invoke(it)
+                onClickBook?.invoke(it)
             }
         }
 
@@ -52,17 +50,17 @@ class LibraryScreenAdapter : ListAdapter<MyBooksData, LibraryScreenAdapter.Outer
         }
     }
 
-    object OuterDiffUtil : DiffUtil.ItemCallback<MyBooksData>() {
+    object OuterDiffUtil : DiffUtil.ItemCallback<CategoryBooksData>() {
         override fun areItemsTheSame(
-            oldItem: MyBooksData,
-            newItem: MyBooksData
+            oldItem: CategoryBooksData,
+            newItem: CategoryBooksData
         ): Boolean {
-            return oldItem.type == newItem.type
+            return oldItem.docId == newItem.docId
         }
 
         override fun areContentsTheSame(
-            oldItem: MyBooksData,
-            newItem: MyBooksData
+            oldItem: CategoryBooksData,
+            newItem: CategoryBooksData
         ): Boolean {
             return oldItem == newItem
         }
@@ -83,10 +81,10 @@ class LibraryScreenAdapter : ListAdapter<MyBooksData, LibraryScreenAdapter.Outer
     }
 
     fun setOnClickProduct(onClickProduct: ((MyBooksData) -> Unit)) {
-        this.onClickProduct = onClickProduct
+        this.onClickBook = onClickProduct
     }
 
-    fun setOnClickCategory(onClickCategory: ((MyBooksData) -> Unit)) {
+    fun setOnClickCategory(onClickCategory: ((CategoryBooksData) -> Unit)) {
         this.onClickCategory = onClickCategory
     }
 

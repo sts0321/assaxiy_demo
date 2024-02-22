@@ -7,5 +7,5 @@ import uz.developers.asaxiybooks.data.model.TypeEnum
 
 interface LibraryVM {
 
-    fun getCategoryBooksData(type:TypeEnum):Flow<Result<List<CategoryBooksData>>>
+    fun getCategoryBooksData():Flow<Result<List<CategoryBooksData>>>
 }

@@ -20,7 +20,7 @@ class LibraryVMImpl @Inject constructor(
 ) : ViewModel(), LibraryVM {
 
 
-    override fun getCategoryBooksData(type: TypeEnum): Flow<Result<List<CategoryBooksData>>> =
+    override fun getCategoryBooksData(): Flow<Result<List<CategoryBooksData>>> =
         callbackFlow{
             val data=ArrayList<CategoryBooksData>()
         appRepository.getCategoryBooks().onEach { result->
@@ -29,7 +29,7 @@ class LibraryVMImpl @Inject constructor(
                var index=0
                list.forEach {
 
-                   appRepository.getBooksInCategory(it.second,type).onEach { res->
+                   appRepository.getBooksInCategory(it.second,TypeEnum.PDF).onEach { res->
                        res.onSuccess { myBooks->
                            index++
                            data.add(CategoryBooksData(it.second,it.first,myBooks))
