@@ -57,4 +57,66 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
         awaitClose()
     }
 
+    override fun getCategoryBooks(): Flow<Result<List<Pair<String, String>>>> = callbackFlow{
+        val data=ArrayList<Pair<String,String>>()
+        fireStore.collection("category")
+            .get().addOnSuccessListener {
+                val size=it.size()
+                var index=0
+                it.forEach {
+                    index++
+                    data.add(Pair(it.id,it.data.getOrDefault("name","Ali").toString()))
+                    if (size==index){
+                        trySend(Result.success(data))
+                    }
+                }
+
+            }
+            .addOnFailureListener {
+                trySend(Result.failure(it))
+            }
+        awaitClose()
+    }
+
+    override fun getBooksInCategory(categoryId: String): Flow<Result<List<MyBooksData>>> = callbackFlow {
+        val data=ArrayList<MyBooksData>()
+        var index=0
+        fireStore.collection("books")
+            .whereEqualTo("categoryId",categoryId)
+            .get().addOnSuccessListener { query->
+                val size=query.size()
+
+                query.forEach {
+                    index++
+                    val name=(it.data.getOrDefault("name","")?:"").toString()
+                    val description=(it.data.getOrDefault("description","")?:"").toString()
+                    val coverImage=it.data.getOrDefault("coverImage", arrayListOf("")) as List<String>
+                    val author=(it.data.getOrDefault("author", "")?:"Ali").toString()
+                    val totalSize=(it.data.getOrDefault("total size","10 mb")?:"12 mb").toString()
+                    val file=(it.data.getOrDefault("filePath","")?:"").toString()
+                    val type=(it.data.getOrDefault("type","pdf")?:"pdf").toString()
+                    data.add(
+                        MyBooksData(
+                            id=it.id,
+                            bookName = name,
+                            bookAuthor = author,
+                            bookSize = totalSize,
+                            bookPicture =coverImage,
+                            descriptions =description,
+                            type = type,
+                            file = file
+                        )
+                    )
+                    if (index==size){
+                        trySend(Result.success(data))
+                    }
+                }
+            }
+            .addOnFailureListener {
+                index++
+                trySend(Result.failure(it))
+            }
+        awaitClose()
+    }
+
 }
