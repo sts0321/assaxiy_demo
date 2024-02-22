@@ -17,6 +17,7 @@ import uz.developers.asaxiybooks.data.model.CategoryBooksData
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.data.model.TypeEnum
 import uz.developers.asaxiybooks.domain.AppRepository
+import uz.developers.asaxiybooks.presenter.screen.HomeScreenDirections
 import uz.developers.asaxiybooks.presenter.viewModel.LibraryVM
 import javax.inject.Inject
 
@@ -68,8 +69,9 @@ class LibraryVMImpl @Inject constructor(
 
     override  fun onClickItem(name: String, link: String) {
         viewModelScope.launch {
-            val bundle= bundleOf(Pair("name",name),Pair("link",link))
-            appNavigator.navigateTo(R.id.action_homeScreen_to_readBookScreen,bundle)
+            "salom dunyo".myLog()
+//            appNavigator.navigateTo(HomeScreenDirections.actionHomeScreenToReadBookScreen())
+//            appNavigator.navigateTo(R.id.action_homeScreen_to_readBookScreen)
         }
     }
 

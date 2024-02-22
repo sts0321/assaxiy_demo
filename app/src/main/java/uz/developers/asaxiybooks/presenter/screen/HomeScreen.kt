@@ -16,8 +16,9 @@ class HomeScreen : Fragment(R.layout.screen_home) {
     private val libraryScreen=LibraryScreen()
     private val audioBookScreen=AudioBookScreen()
     private val profileScreen=ProfileScreen()
-    private val adapter by lazy { ViewPagerAdapter(this,myBooksScreen,libraryScreen,audioBookScreen, profileScreen) }
+    private lateinit var adapter:ViewPagerAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        adapter=ViewPagerAdapter(this,myBooksScreen,libraryScreen,audioBookScreen, profileScreen)
         binding.viewPager.adapter=adapter
         binding.viewPager.isUserInputEnabled=false
         initButtons()

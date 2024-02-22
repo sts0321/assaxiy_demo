@@ -20,6 +20,12 @@ class PrefImpl @Inject constructor(
     override fun setFirstTime(isFirstTime: Boolean) {
         sharedPreferences.edit().putBoolean("FIRST_TIME",isFirstTime).apply()
     }
+
+    override fun setBookInfo(bookId: String, bookLink: String) {
+        sharedPreferences.edit().putString(bookId,bookLink).apply()
+    }
+
+    override fun getBookLink(bookId: String):String=sharedPreferences.getString(bookId,"")?:""
 }
 
 
