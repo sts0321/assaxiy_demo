@@ -31,5 +31,12 @@
     <fragment
         android:id="@+id/readBookScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.ReadBookScreen"
-        android:label="ReadBookScreen" />
+        android:label="ReadBookScreen" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
 </navigation>
