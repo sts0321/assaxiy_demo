@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/kitoblarim"
+    android:title="Kitoblarim"/>
+    <item android:id="@+id/kutubhona"
+        android:title="Kutubhona"/>
+    <item android:id="@+id/audio_kitoblar"
+        android:title="Audio kitoblar"/>
+    <item android:id="@+id/profil"
+        android:title="Profil"/>
+</menu>

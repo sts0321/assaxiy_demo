@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.databinding.ItemMybookBinding
 
@@ -29,7 +30,8 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
             getItem(adapterPosition).apply {
                 binding.bookName.text = bookName
                 binding.authorName.text = bookAuthor
-                binding.bookPicture.setImageResource(bookPicture)
+                Glide.with(binding.root.context).load(bookPicture[0]).into(binding.bookPicture)
+//                binding.bookPicture.setImageResource(bookPicture)
                 if(type =="pdf"){
                     binding.audioBook.visibility  = View.GONE
                     binding.audioBookText.visibility = View.GONE
