@@ -12,6 +12,14 @@ class PrefImpl @Inject constructor(
     init {
         sharedPreferences=context.getSharedPreferences("ChessGame",Context.MODE_PRIVATE)
     }
+
+    override fun isFirstTime(): Boolean {
+        return sharedPreferences.getBoolean("FIRST_TIME",false)
+    }
+
+    override fun setFirstTime(isFirstTime: Boolean) {
+        sharedPreferences.edit().putBoolean("FIRST_TIME",isFirstTime).apply()
+    }
 }
 
 
