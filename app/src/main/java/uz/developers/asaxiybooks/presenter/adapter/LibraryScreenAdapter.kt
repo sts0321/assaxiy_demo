@@ -45,7 +45,8 @@ class LibraryScreenAdapter : ListAdapter<CategoryBooksData, LibraryScreenAdapter
         fun bind() {
             binding.apply {
                 " bu Adapter".myLog()
-
+                adapter.submitList(getItem(adapterPosition).myBooks)
+                categoryName.text=getItem(adapterPosition).name
             }
         }
     }

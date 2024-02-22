@@ -2,6 +2,7 @@ package uz.developers.asaxiybooks.presenter.viewModel.impl
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nasiyaapp.utils.myLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -22,17 +23,21 @@ class LibraryVMImpl @Inject constructor(
 
     override fun getCategoryBooksData(): Flow<Result<List<CategoryBooksData>>> =
         callbackFlow{
+
             val data=ArrayList<CategoryBooksData>()
         appRepository.getCategoryBooks().onEach { result->
            result.onSuccess { list->
+               "salom".myLog()
                val size=list.size
                var index=0
+               "$size size".myLog()
                list.forEach {
 
-                   appRepository.getBooksInCategory(it.second,TypeEnum.PDF).onEach { res->
+                   appRepository.getBooksInCategory(it.first,TypeEnum.PDF).onEach { res->
                        res.onSuccess { myBooks->
                            index++
-                           data.add(CategoryBooksData(it.second,it.first,myBooks))
+                           "$index index".myLog()
+                           data.add(CategoryBooksData(it.first,it.second,myBooks))
                            if (size==index){
                                trySend(Result.success(data))
                            }
@@ -42,7 +47,7 @@ class LibraryVMImpl @Inject constructor(
                        }
 
 
-                   }
+                   }.launchIn(viewModelScope)
 
                }
            }
