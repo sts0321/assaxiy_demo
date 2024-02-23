@@ -17,16 +17,23 @@ import javax.inject.Inject
 class BookDetailViewModelImpl @Inject constructor(
     private val booksRepository: BooksRepository
 ) : ViewModel(), BookDetailViewModel {
+    var counter=0
     override fun setBookInUser(bookId: String): Flow<Result<Unit>> = callbackFlow {
-        booksRepository.setBookFromUser(bookId).onEach {
-            it.onSuccess {
-                "success".myLog()
-                trySend(Result.success(Unit))
-            }
-            it.onFailure {
-                trySend(Result.failure(it))
-            }
-        }.launchIn(viewModelScope)
+        if (counter==0){
+            booksRepository.setBookFromUser(bookId).onEach {
+                it.onSuccess {
+                    counter++
+                    "success".myLog()
+                    trySend(Result.success(Unit))
+                    channel.close()
+                }
+                it.onFailure {
+                    counter++
+                    trySend(Result.failure(it))
+                    channel.close()
+                }
+            }.launchIn(viewModelScope)
+        }
 
         awaitClose()
     }
