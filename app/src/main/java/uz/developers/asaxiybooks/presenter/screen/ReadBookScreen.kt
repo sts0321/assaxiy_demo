@@ -1,27 +1,19 @@
 package uz.developers.asaxiybooks.presenter.screen
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.nasiyaapp.utils.myLog
-import com.github.barteksc.pdfviewer.source.DocumentSource
-import com.google.firebase.Firebase
-import com.google.firebase.storage.storage
 import dagger.hilt.android.AndroidEntryPoint
 import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.data.sourse.PrefImpl
 import uz.developers.asaxiybooks.databinding.ScreenPdfreaderBinding
 import java.io.File
-import java.net.URI
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
