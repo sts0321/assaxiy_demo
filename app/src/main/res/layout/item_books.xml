@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/item_bg"
+    android:layout_marginHorizontal="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp">
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/book_image"
+        android:src="@drawable/hacker_crackdown"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"/>
+    <TextView
+        app:layout_constraintTop_toTopOf="@id/book_image"
+        android:id="@+id/book_name"
+        android:textStyle="bold"
+        android:maxWidth="150sp"
+        android:text="Savol ortidagi savol "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/book_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/book_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/book_image"
+        app:layout_constraintStart_toEndOf="@id/book_name"
+        android:textColor="#0587EB"
+        android:textStyle="bold"
+        android:text="19 990 so'm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/book_image"
+        app:layout_constraintTop_toBottomOf="@id/book_name"
+        android:id="@+id/author_name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:maxWidth="150sp"
+        android:text="John G.Miller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/book_icon"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/icon_book_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        android:src="@drawable/books"
+        android:layout_width="32dp"
+        android:layout_height="30dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
