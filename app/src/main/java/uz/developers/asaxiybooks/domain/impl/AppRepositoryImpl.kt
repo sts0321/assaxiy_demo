@@ -74,9 +74,6 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
 
     override fun getCategoryBooks(): Flow<Result<List<Pair<String, String>>>> = callbackFlow{
         val data=ArrayList<Pair<String,String>>()
-
-
-
         fireStore.collection("category")
             .get().addOnSuccessListener {
                 val size=it.size()
