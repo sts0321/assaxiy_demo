@@ -2,10 +2,12 @@ package uz.developers.asaxiybooks.presenter.screen
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.developers.asaxiybooks.R
@@ -36,18 +38,24 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
     }
 
     private fun dialogLogOut() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        builder.setMessage("Log Out").setTitle("Do you want Log Out? ")
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Do you want to Log Out?").setTitle("Log Out")
             .setPositiveButton("Log Out") { dialog, _ ->
                 pref.setUserInfo(UserData("", "", "", "", "", ArrayList(0)))
+                findNavController().navigate(HomeScreenDirections.actionHomeScreenToLoginScreen())
                 dialog.dismiss()
             }.setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
             }
 
         val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(false)
         dialog.show()
 
-    }
+        // Set the positive button text color
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
 
+        // Set the negative button text color
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+    }
 }
