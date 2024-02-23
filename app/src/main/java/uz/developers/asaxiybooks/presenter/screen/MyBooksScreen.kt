@@ -45,7 +45,11 @@ class MyBooksScreen:Fragment(R.layout.screen_mybooks) {
         binding.rec.adapter = adapter
         binding.rec.layoutManager = GridLayoutManager(requireContext(),2)
         adapter.onClickItem={
-            findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
+            if (it.type=="pdf"){
+                findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
+            }else{
+                findNavController().navigate(HomeScreenDirections.actionHomeScreenToMusicDetalScreen(it))
+            }
         }
 
     }
