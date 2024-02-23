@@ -23,10 +23,8 @@ class AudioLibraryVMImpl @Inject constructor(
     private val appNavigator: AppNavigator
 ) : ViewModel(), AudioLibraryVM {
 
-
     override fun getCategoryBooksData(): Flow<Result<List<CategoryBooksData>>> =
         callbackFlow{
-
             val data=ArrayList<CategoryBooksData>()
             appRepository.getCategoryBooks().onEach { result->
                 result.onSuccess { list->
