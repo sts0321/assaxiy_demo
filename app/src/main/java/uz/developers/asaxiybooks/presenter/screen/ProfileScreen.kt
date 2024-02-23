@@ -35,6 +35,10 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         binding.logOut.setOnClickListener {
             dialogLogOut()
         }
+
+        binding.shoppingHistory.setOnClickListener{
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToHistoryScreen())
+        }
     }
 
     private fun dialogLogOut() {
@@ -53,7 +57,7 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         dialog.show()
 
         // Set the positive button text color
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
 
         // Set the negative button text color
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)

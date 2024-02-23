@@ -46,6 +46,9 @@
             app:destination="@id/loginScreen"
             app:popUpTo="@id/homeScreen"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeScreen_to_historyScreen"
+            app:destination="@id/historyScreen" />
     </fragment>
     <fragment
         tools:layout="@layout/screen_intro"
@@ -123,4 +126,8 @@
             android:id="@+id/action_musicDetalScreen_to_audioBookScreen"
             app:destination="@id/audioBookScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/historyScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.HistoryScreen"
+        android:label="HistoryScreen" />
 </navigation>
