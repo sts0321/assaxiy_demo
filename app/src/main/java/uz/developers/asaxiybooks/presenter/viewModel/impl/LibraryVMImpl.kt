@@ -43,7 +43,9 @@ class LibraryVMImpl @Inject constructor(
                        res.onSuccess { myBooks->
                            index++
                            "$index index".myLog()
-                           data.add(CategoryBooksData(it.first,it.second,myBooks))
+                           if (myBooks.size!=0){
+                               data.add(CategoryBooksData(it.first,it.second,myBooks))
+                           }
                            if (size==index){
                                trySend(Result.success(data))
                            }

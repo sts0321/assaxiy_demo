@@ -35,12 +35,13 @@ class AudioLibraryVMImpl @Inject constructor(
                     var index=0
                     "$size size".myLog()
                     list.forEach {
-
                         appRepository.getBooksInCategory(it.first, TypeEnum.MP3).onEach { res->
                             res.onSuccess { myBooks->
                                 index++
                                 "$index index".myLog()
-                                data.add(CategoryBooksData(it.first,it.second,myBooks))
+                                if (myBooks.size!=0){
+                                    data.add(CategoryBooksData(it.first,it.second,myBooks))
+                                }
                                 if (size==index){
                                     trySend(Result.success(data))
                                 }

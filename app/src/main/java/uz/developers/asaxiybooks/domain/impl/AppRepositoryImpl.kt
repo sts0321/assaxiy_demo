@@ -14,7 +14,9 @@ import uz.developers.asaxiybooks.data.model.UserData
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppRepository {
     private val fireStore = Firebase.firestore
     override fun getAllBooks(type: TypeEnum): Flow<Result<List<MyBooksData>>> = callbackFlow{
@@ -74,9 +76,6 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
 
     override fun getCategoryBooks(): Flow<Result<List<Pair<String, String>>>> = callbackFlow{
         val data=ArrayList<Pair<String,String>>()
-
-
-
         fireStore.collection("category")
             .get().addOnSuccessListener {
                 val size=it.size()
@@ -158,7 +157,7 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                    val lastName=it.data.getOrDefault("lastName","Ali").toString()
                    val gmail=it.data.getOrDefault("gmail","Ali").toString()
                    val password=it.data.getOrDefault("password","Ali").toString()
-                   pref.setUserInfo(UserData(firstName, lastName, password, gmail))
+                   pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail))
                    trySend(Result.success(Unit))
                    channel.close()
                    pref.setLogIn(true)
