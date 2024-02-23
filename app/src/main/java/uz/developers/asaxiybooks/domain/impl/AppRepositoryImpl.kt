@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.data.model.TypeEnum
+import uz.developers.asaxiybooks.data.model.UserData
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
 import javax.inject.Inject
@@ -61,6 +62,12 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                 trySend(Result.failure(it))
             }
         awaitClose()
+    }
+
+    override suspend fun signUpUser(userData: UserData) {
+        fireStore.collection("users").add(userData).addOnSuccessListener {
+
+        }
     }
 
     override fun getCategoryBooks(): Flow<Result<List<Pair<String, String>>>> = callbackFlow{

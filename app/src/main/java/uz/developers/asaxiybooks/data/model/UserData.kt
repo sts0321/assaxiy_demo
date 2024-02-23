@@ -1,6 +1,8 @@
 package uz.developers.asaxiybooks.data.model
 
 data class UserData(
-    val id:String,
-    val name:String
+    val name:String,
+    val password:String,
+    val phone: String,
+    val books: ArrayList<String>
 )

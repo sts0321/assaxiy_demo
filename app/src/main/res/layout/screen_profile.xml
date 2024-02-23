@@ -86,7 +86,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:fontFamily="@font/nunito"
                 android:id="@+id/text_balance"
