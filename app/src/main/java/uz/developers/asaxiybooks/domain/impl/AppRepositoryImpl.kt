@@ -10,6 +10,7 @@ import uz.developers.asaxiybooks.data.model.CreateAccount
 import uz.developers.asaxiybooks.data.model.LogInData
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.data.model.TypeEnum
+import uz.developers.asaxiybooks.data.model.UserData
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
 import javax.inject.Inject
@@ -65,11 +66,14 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
         awaitClose()
     }
 
+    override suspend fun signUpUser(userData: UserData) {
+        fireStore.collection("users").add(userData).addOnSuccessListener {
+
+        }
+    }
+
     override fun getCategoryBooks(): Flow<Result<List<Pair<String, String>>>> = callbackFlow{
         val data=ArrayList<Pair<String,String>>()
-
-
-
         fireStore.collection("category")
             .get().addOnSuccessListener {
                 val size=it.size()
@@ -127,9 +131,10 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                     )
                     "$index indexV".myLog()
                     if (index==size){
-                        trySend(Result.success(data))
+
                     }
                 }
+                trySend(Result.success(data))
             }
             .addOnFailureListener {
                 index++
@@ -142,13 +147,25 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
         val gmail = logInData.gmail
        fireStore.collection("user")
            .whereEqualTo("gmail",gmail)
+           .whereEqualTo("password",logInData.password)
            .get().addOnSuccessListener {
-               pref.setLogIn(true)
-               trySend(Result.success(Unit))
 
+               it.forEach {
+                   val firstName=it.data.getOrDefault("firstName","Ali").toString()
+                   val lastName=it.data.getOrDefault("lastName","Ali").toString()
+                   val gmail=it.data.getOrDefault("gmail","Ali").toString()
+                   val password=it.data.getOrDefault("password","Ali").toString()
+                   pref.setUserInfo(UserData(firstName, lastName, password, gmail))
+                   trySend(Result.success(Unit))
+                   channel.close()
+                   pref.setLogIn(true)
+               }
+               trySend(Result.failure(Throwable("Bunaka user yo'q!!")))
+               channel.close()
            }
            .addOnFailureListener {
                trySend(Result.failure(it))
+               channel.close()
            }
 
         awaitClose()

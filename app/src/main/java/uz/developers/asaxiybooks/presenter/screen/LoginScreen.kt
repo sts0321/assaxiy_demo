@@ -46,6 +46,7 @@ class LoginScreen : Fragment(R.layout.screen_login) {
 
 
         binding.singUpText.setOnClickListener {
+
             findNavController().navigate(R.id.action_loginScreen_to_signUpScreen)
         }
 
