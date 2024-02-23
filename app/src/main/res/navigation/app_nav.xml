@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_homeScreen_to_historyScreen"
             app:destination="@id/historyScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_allBookScreen"
+            app:destination="@id/allBookScreen" />
     </fragment>
     <fragment
         tools:layout="@layout/screen_intro"
@@ -125,6 +128,14 @@
         <action
             android:id="@+id/action_musicDetalScreen_to_audioBookScreen"
             app:destination="@id/audioBookScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/allBookScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.AllBookScreen"
+        android:label="AllBookScreen">
+        <argument
+            android:name="category"
+            app:argType="uz.developers.asaxiybooks.data.model.CategoryBooksData" />
     </fragment>
     <fragment
         android:id="@+id/historyScreen"

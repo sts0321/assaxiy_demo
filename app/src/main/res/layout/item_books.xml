@@ -65,7 +65,8 @@
         android:padding="8dp"
         android:src="@drawable/books2"
         android:layout_width="32dp"
-        android:layout_height="30dp"/>
+        android:layout_height="30dp"
+        app:tint="#E68E08" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
