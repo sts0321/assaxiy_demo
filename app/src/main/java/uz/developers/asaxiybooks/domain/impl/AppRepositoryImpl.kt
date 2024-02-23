@@ -157,7 +157,8 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                    val lastName=it.data.getOrDefault("lastName","Ali").toString()
                    val gmail=it.data.getOrDefault("gmail","Ali").toString()
                    val password=it.data.getOrDefault("password","Ali").toString()
-                   pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail))
+                   val books=it.data.getOrDefault("books", listOf(""))as ArrayList<String>
+                   pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,books))
                    trySend(Result.success(Unit))
                    channel.close()
                    pref.setLogIn(true)

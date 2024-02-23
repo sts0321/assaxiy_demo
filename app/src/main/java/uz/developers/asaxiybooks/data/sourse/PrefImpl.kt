@@ -5,6 +5,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import uz.developers.asaxiybooks.data.model.UserData
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.sign
+
 @Singleton
 class PrefImpl @Inject constructor(
     @ApplicationContext context: Context
@@ -42,6 +44,10 @@ class PrefImpl @Inject constructor(
         sharedPreferences.edit().putString("lastName",user.lastName).apply()
         sharedPreferences.edit().putString("gmail",user.gmail).apply()
         sharedPreferences.edit().putString("password",user.password).apply()
+        sharedPreferences.edit().putInt("size",user.books.size).apply()
+        for (i in 0..<user.books.size){
+            sharedPreferences.edit().putString("userBooks$i",user.books[i]).apply()
+        }
     }
 
     override fun getUserInfo():UserData{
@@ -50,7 +56,15 @@ class PrefImpl @Inject constructor(
         val gmail=sharedPreferences.getString("gmail","")?:""
         val password=sharedPreferences.getString("password","")?:""
         val id=sharedPreferences.getString("id","")?:""
-        return UserData(id, firstName, lastName, password, gmail)
+        val size=sharedPreferences.getInt("size",0)
+        val list=ArrayList<String>(size)
+        for (i in 0..<size){
+            val bookId=sharedPreferences.getString("userBooks$i","")?:""
+            if (bookId!=""){
+                list.add(bookId)
+            }
+        }
+        return UserData(id, firstName, lastName, password, gmail,list)
     }
 }
 

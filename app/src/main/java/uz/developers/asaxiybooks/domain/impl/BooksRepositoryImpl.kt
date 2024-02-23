@@ -62,13 +62,21 @@ class BooksRepositoryImpl @Inject constructor(private val pref: Pref) : BooksRep
     }
 
     override fun setBookFromUser(bookId: String): Flow<Result<Unit>> = callbackFlow{
+        val list=pref.getUserInfo().books
+        list.add(bookId)
+        var user=pref.getUserInfo()
+        user.books=list
+        pref.setUserInfo(user)
         fireStore.collection("user")
             .document(pref.getUserInfo().id)
-
-//            .get().addOnSuccessListener
-
-
-
+            .update("books",list).addOnSuccessListener {
+                trySend(Result.success(Unit))
+                channel.close()
+            }
+            .addOnFailureListener {
+                trySend(Result.failure(it))
+                channel.close()
+            }
         awaitClose()
     }
 }

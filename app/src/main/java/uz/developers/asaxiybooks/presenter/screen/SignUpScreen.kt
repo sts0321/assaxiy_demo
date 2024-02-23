@@ -57,7 +57,7 @@ class SignUpScreen : Fragment(R.layout.screen_singup){
             val gmail = binding.editGmailText.text.toString()
             val password = binding.editPasswordText.text.toString()
             val id=UUID.randomUUID().toString()
-            myShar.setUserInfo(UserData(id, firstName, lastName, password, gmail))
+            myShar.setUserInfo(UserData(id, firstName, lastName, password, gmail, arrayListOf()))
             viewModel.createAccount(CreateAccount( id = id, firstName = firstName,lastName = lastName,gmail = gmail, password = password))
         }
 

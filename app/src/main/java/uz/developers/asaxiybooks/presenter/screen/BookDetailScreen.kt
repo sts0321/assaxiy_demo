@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,6 +14,9 @@ import com.bumptech.glide.Glide
 import com.example.nasiyaapp.utils.myLog
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.data.sourse.PrefImpl
@@ -20,7 +25,7 @@ import uz.developers.asaxiybooks.presenter.viewModel.BookDetailViewModel
 import uz.developers.asaxiybooks.presenter.viewModel.impl.BookDetailViewModelImpl
 import java.io.File
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class BookDetailScreen : Fragment(R.layout.screen_detail) {
     private val binding by viewBinding(ScreenDetailBinding::bind)
     private val viewModel: BookDetailViewModel by viewModels<BookDetailViewModelImpl>()
@@ -30,11 +35,35 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        initInfo()
-        initButton()
-        if (shar.getBookLink(bookData.id)!=""){
-            binding.download.text="Okish"
+        if (!shar.getUserInfo().books.contains(bookData.id)){
+            binding.download.text="Sotip olish"
             binding.download.setOnClickListener {
-                findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(bookData))
+                binding.progressBar.visibility=View.VISIBLE
+                binding.progresBth.visibility=View.VISIBLE
+                binding.download.visibility=View.INVISIBLE
+
+                viewModel.setBookInUser(bookData.id).onEach {
+                    it.onSuccess {
+                        initButton()
+                        binding.progresBth.visibility=View.INVISIBLE
+                        binding.progresBth.visibility=View.INVISIBLE
+                        binding.download.visibility=View.VISIBLE
+                    }
+                    it.onFailure {
+                        binding.progresBth.visibility=View.INVISIBLE
+                        binding.progresBth.visibility=View.INVISIBLE
+                        binding.download.visibility=View.VISIBLE
+                    }
+                }.flowWithLifecycle(lifecycle).launchIn(lifecycleScope)
+            }
+        }else{
+            if (shar.getBookLink(bookData.id)!=""){
+                binding.download.text="Okish"
+                binding.download.setOnClickListener {
+                    findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(bookData))
+                }
+            }else{
+                initButton()
             }
         }
     }
@@ -52,6 +81,7 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
         binding.progres.visibility=View.GONE
     }
     fun initButton(){
+        binding.download.text="Yuklash"
         binding.download.setOnClickListener {
             binding.seekBar.visibility=View.VISIBLE
             binding.progres.visibility=View.VISIBLE
