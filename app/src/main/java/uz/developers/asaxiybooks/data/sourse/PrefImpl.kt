@@ -26,6 +26,14 @@ class PrefImpl @Inject constructor(
     }
 
     override fun getBookLink(bookId: String):String=sharedPreferences.getString(bookId,"")?:""
+
+    override fun setLogIn(boolean: Boolean) {
+        sharedPreferences.edit().putBoolean("LOG",boolean).apply()
+    }
+
+    override fun getLogIn(): Boolean {
+       return sharedPreferences.getBoolean("LOG",false)
+    }
 }
 
 

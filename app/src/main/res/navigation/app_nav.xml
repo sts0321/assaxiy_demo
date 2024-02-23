@@ -10,15 +10,21 @@
         tools:layout="@layout/screen_splash"
         android:name="uz.developers.asaxiybooks.presenter.screen.SplashScreen"
         android:label="SplashScreen" >
-        <action
-            android:id="@+id/action_splashScreen_to_homeScreen"
-            app:destination="@id/homeScreen"
-            app:popUpTo="@id/splashScreen"
-            app:popUpToInclusive="true"/>
+
         <action
             android:id="@+id/action_splashScreen_to_introScreen"
             app:destination="@id/introScreen"
             app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreen_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:popUpTo="@id/loginScreen"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreen_to_homeScreen2"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/homeScreen"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -38,11 +44,10 @@
         android:id="@+id/introScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.IntroScreen"
         android:label="IntroScreen" >
+
         <action
-            android:id="@+id/action_introScreen_to_homeScreen"
-            app:destination="@id/homeScreen"
-            app:popUpTo="@id/introScreen"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_introScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
     </fragment>
     <fragment
         android:id="@+id/readBookScreen"
@@ -62,5 +67,29 @@
         <argument
             android:name="book"
             app:argType="uz.developers.asaxiybooks.data.model.MyBooksData" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/screen_login"
+        android:id="@+id/loginScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.LoginScreen"
+        android:label="LoginScreen" >
+        <action
+            android:id="@+id/action_loginScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
+        <action
+            android:id="@+id/action_loginScreen_to_signUpScreen"
+            app:destination="@id/signUpScreen" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/screen_singup"
+        android:id="@+id/signUpScreen"
+        android:name="uz.developers.asaxiybooks.presenter.screen.SignUpScreen"
+        android:label="SignUpScreen" >
+        <action
+            android:id="@+id/action_signUpScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
+        <action
+            android:id="@+id/action_signUpScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
     </fragment>
 </navigation>

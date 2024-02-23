@@ -31,7 +31,7 @@ class IntroScreen : Fragment(R.layout.screen_intro) {
                 super.onPageSelected(position)
 
                 binding.start.setOnClickListener {
-                    findNavController().navigate(IntroScreenDirections.actionIntroScreenToHomeScreen())
+                    findNavController().navigate(IntroScreenDirections.actionIntroScreenToLoginScreen())
                 }
 
                 if (position == 2) binding.start.text = "start"
