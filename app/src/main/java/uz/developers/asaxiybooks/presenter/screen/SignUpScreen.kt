@@ -27,7 +27,7 @@ import java.util.UUID
 
 @AndroidEntryPoint
 class SignUpScreen : Fragment(R.layout.screen_singup){
-    private val myShar:Pref=PrefImpl(requireContext())
+    private val myShar:Pref by lazy {  PrefImpl(requireContext())}
     private val binding by viewBinding(ScreenSingupBinding::bind)
 
     private val viewModel:SignInViewModel by viewModels<SignInViewModelImpl>()
