@@ -19,8 +19,8 @@ import java.io.File
 
 class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
     private val binding by viewBinding(ScreenMusicDetalBinding::bind)
-    private val navArgs=navArgs<ReadBookScreenArgs>()
-    private val audioBookData by lazy { navArgs.value.book }
+    private val navArgs=navArgs<MusicDetalScreenArgs>()
+    private val audioBookData by lazy { navArgs.value.audioBook }
     val shar: Pref by lazy {  PrefImpl(requireContext()) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +29,7 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
         if (shar.getBookLink(audioBookData.id)!=""){
             binding.download.text="Tinglash"
             binding.download.setOnClickListener {
-                findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(audioBookData))
+                findNavController().navigate(MusicDetalScreenDirections.actionMusicDetalScreenToAudioBookScreen(audioBookData))
             }
         }
     }
@@ -65,7 +65,7 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
                         binding.download.visibility= View.VISIBLE
                         binding.download.text="Tinglash"
                         binding.download.setOnClickListener {
-                            findNavController().navigate(BookDetailScreenDirections.actionBookDetailScreenToReadBookScreen(audioBookData))
+                            findNavController().navigate(MusicDetalScreenDirections.actionMusicDetalScreenToAudioBookScreen(audioBookData))
                         }
                     }
                 }

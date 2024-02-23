@@ -98,11 +98,18 @@
     <fragment
         android:id="@+id/audioBookScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.AudioBookScreen"
-        android:label="AudioBookScreen" />
+        android:label="AudioBookScreen" >
+        <argument
+            android:name="audioBook"
+            app:argType="uz.developers.asaxiybooks.data.model.MyBooksData" />
+    </fragment>
     <fragment
         android:id="@+id/musicDetalScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.MusicDetalScreen"
         android:label="MusicDetalScreen" >
+        <argument
+            android:name="audioBook"
+            app:argType="uz.developers.asaxiybooks.data.model.MyBooksData" />
         <action
             android:id="@+id/action_musicDetalScreen_to_audioBookScreen"
             app:destination="@id/audioBookScreen" />

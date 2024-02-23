@@ -9,19 +9,18 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.developers.asaxiybooks.data.model.MyBooksData
-import uz.developers.asaxiybooks.data.model.TypeEnum
-import uz.developers.asaxiybooks.domain.AppRepository
+import uz.developers.asaxiybooks.domain.BooksRepository
 import uz.developers.asaxiybooks.presenter.viewModel.MyBooksVM
 import javax.inject.Inject
 
 
 @HiltViewModel
 class MyBooksVMImpl @Inject constructor(
-    val appRepository: AppRepository
+    val booksRepository: BooksRepository
 ):ViewModel(),MyBooksVM {
     override fun getBooks(): Flow<Result<List<MyBooksData>>> = callbackFlow{
-        appRepository.getAllBooks(TypeEnum.PDF).onEach {
-            trySend(it)
+        booksRepository.getBooksFromUser().onEach {
+            trySend(Result.success(it))
         }.launchIn(viewModelScope)
         awaitClose()
     }
