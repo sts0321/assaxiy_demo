@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.databinding.ItemMybookBinding
 
@@ -35,8 +36,17 @@ class MyBookAdapter:ListAdapter<MyBooksData,MyBookAdapter.MyViewHolder>(MyDif) {
                 Glide.with(binding.root.context).load(bookPicture[0]).into(binding.imgBook)
 //                binding.bookPicture.setImageResource(bookPicture)
                 if(type =="pdf"){
+                    binding.apply {
+                        typeImg.setBackgroundResource(R.drawable.books2)
+                        typeText.text="(Kitob)"
+                    }
 //                    binding..visibility  = View.GONE
 //                    binding.audioBookText.visibility = View.GONE
+                }else{
+                    binding.apply {
+                        typeImg.setBackgroundResource(R.drawable.headphones)
+                        typeText.text="(Audio kitob)"
+                    }
                 }
                 binding.root.setOnClickListener {
                     onClickItem?.invoke(this)

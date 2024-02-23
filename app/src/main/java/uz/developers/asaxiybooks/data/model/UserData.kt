@@ -7,5 +7,6 @@ data class UserData(
     val lastName:String,
     val password:String,
     val gmail: String,
+    var books:ArrayList<String>
 
 )

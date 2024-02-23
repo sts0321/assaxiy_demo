@@ -4,7 +4,7 @@
         android:icon="@drawable/book"
     android:title="Kitoblarim"/>
     <item android:id="@+id/kutubhona"
-        android:icon="@drawable/books"
+        android:icon="@drawable/books2"
         android:title="Kutubhona"/>
     <item android:id="@+id/audio_kitoblar"
         android:icon="@drawable/headphones"
