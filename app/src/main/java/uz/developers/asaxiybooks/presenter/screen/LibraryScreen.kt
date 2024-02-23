@@ -52,5 +52,8 @@ class LibraryScreen : Fragment(R.layout.screen_library) {
             "click".myLog()
             findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
         }
+        adapter.setOnClickCategory {
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToAllBookScreen(it))
+        }
     }
 }
