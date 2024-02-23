@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_height="0dp"/>
 
     <TextView
         android:id="@+id/music_name"
@@ -52,6 +53,7 @@
         android:thumbTint="#3f778b"
         app:layout_constraintEnd_toEndOf="@id/book_image"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/play_btn"
         app:layout_constraintStart_toStartOf="@id/book_image"
         tools:layout_editor_absoluteY="505dp"
         tools:ignore="MissingConstraints" />
