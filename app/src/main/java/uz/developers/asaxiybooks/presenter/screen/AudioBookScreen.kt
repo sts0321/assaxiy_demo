@@ -50,9 +50,19 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
 
     private fun controllerSound() {
         val book = File(shar.getBookLink(bookId = audio.id))
+        audioBook = MediaPlayer.create(requireContext(), Uri.fromFile(book))
+        audioBook?.setOnPreparedListener {
+            seekBar.max = audioBook!!.duration
+            audioBook!!.start()
+            binding.maxTimeText.text = milliSecondsToTimer(audioBook!!.duration.toLong())
+            isPlaying = true
+
+            binding.playBtn.setImageResource(R.drawable.pause_1)
+            startSeekBarUpdate()
+        }
         binding.playBtn.setOnClickListener {
             if (audioBook == null) {
-                audioBook = MediaPlayer.create(requireContext(), Uri.fromFile(book))
+
                 audioBook?.setOnCompletionListener {
                     stopPlaying()
                 }
@@ -61,15 +71,7 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
 //                    stopPlaying()
                     true
                 }
-                audioBook?.setOnPreparedListener {
-                    seekBar.max = audioBook!!.duration
-                    audioBook!!.start()
-                    binding.maxTimeText.text = milliSecondsToTimer(audioBook!!.duration.toLong())
-                    isPlaying = true
 
-                    binding.playBtn.setImageResource(R.drawable.pause_1)
-                    startSeekBarUpdate()
-                }
             } else {
                 if (!isPlaying) {
                     pausePlaying()

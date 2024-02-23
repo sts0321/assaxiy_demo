@@ -41,7 +41,7 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
                 binding.progressBar.visibility=View.VISIBLE
                 binding.progresBth.visibility=View.VISIBLE
                 binding.download.visibility=View.INVISIBLE
-
+                "heheheheheheheh".myLog()
                 viewModel.setBookInUser(bookData.id).onEach {
                     it.onSuccess {
                         initButton()

@@ -35,7 +35,7 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
         super.onViewCreated(view, savedInstanceState)
         initInfo()
         if (!shar.getUserInfo().books.contains(audioBookData.id)){
-            binding.download.text="Sotip olish"
+            binding.download.text="Sotib olish"
             binding.download.setOnClickListener {
                 binding.progressBar.visibility=View.VISIBLE
                 binding.progresBth.visibility=View.VISIBLE
