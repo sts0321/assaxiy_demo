@@ -14,7 +14,9 @@ import uz.developers.asaxiybooks.data.model.UserData
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppRepository {
     private val fireStore = Firebase.firestore
     override fun getAllBooks(type: TypeEnum): Flow<Result<List<MyBooksData>>> = callbackFlow{
