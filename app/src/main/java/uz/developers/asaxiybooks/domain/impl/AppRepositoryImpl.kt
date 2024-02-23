@@ -6,6 +6,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import uz.developers.asaxiybooks.data.model.CreateAccount
+import uz.developers.asaxiybooks.data.model.LogInData
 import uz.developers.asaxiybooks.data.model.MyBooksData
 import uz.developers.asaxiybooks.data.model.TypeEnum
 import uz.developers.asaxiybooks.data.model.UserData
@@ -13,7 +15,7 @@ import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
 import javax.inject.Inject
 
-class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
+class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppRepository {
     private val fireStore = Firebase.firestore
     override fun getAllBooks(type: TypeEnum): Flow<Result<List<MyBooksData>>> = callbackFlow{
         val data=ArrayList<MyBooksData>()
@@ -79,8 +81,10 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
             .get().addOnSuccessListener {
                 val size=it.size()
                 var index=0
+                "$size v".myLog()
                 it.forEach {
                     index++
+                    "$index vm".myLog()
                     data.add(Pair(it.id,it.data.getOrDefault("name","Ali").toString()))
                     if (size==index){
                         trySend(Result.success(data))
@@ -128,7 +132,7 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                             file = file
                         )
                     )
-                    "$index index".myLog()
+                    "$index indexV".myLog()
                     if (index==size){
                         trySend(Result.success(data))
                     }
@@ -138,6 +142,35 @@ class AppRepositoryImpl @Inject constructor(val pref: Pref) : AppRepository {
                 index++
                 trySend(Result.failure(it))
             }
+        awaitClose()
+    }
+
+    override fun logIn(logInData: LogInData): Flow<Result<Unit>> = callbackFlow {
+        val gmail = logInData.gmail
+       fireStore.collection("user")
+           .whereEqualTo("gmail",gmail)
+           .get().addOnSuccessListener {
+               pref.setLogIn(true)
+               trySend(Result.success(Unit))
+
+           }
+           .addOnFailureListener {
+               trySend(Result.failure(it))
+           }
+
+        awaitClose()
+    }
+
+    override fun createAccount(createAccount: CreateAccount): Flow<Result<Unit>> = callbackFlow {
+       fireStore.collection("user")
+           .add(createAccount)
+           .addOnSuccessListener{
+               trySend(Result.success(Unit))
+           }
+           .addOnFailureListener {
+               trySend(Result.failure(it))
+           }
+
         awaitClose()
     }
 

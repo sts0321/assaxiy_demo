@@ -6,4 +6,8 @@ interface Pref {
 
     fun setBookInfo(bookId:String,bookLink:String)
     fun getBookLink(bookId:String):String
+
+    fun setLogIn(boolean: Boolean)
+
+    fun getLogIn():Boolean
 }

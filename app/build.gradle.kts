@@ -99,4 +99,12 @@ dependencies {
 
     // pdf view
     implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
+
+
+    /*
+    * Combine
+    * */
+    implementation(platform("ru.ldralighieri.corbind:corbind-bom:2023.12.00"))
+    implementation("ru.ldralighieri.corbind:corbind")
+    implementation("ru.ldralighieri.corbind:corbind-core")
 }

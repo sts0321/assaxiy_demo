@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.developers.asaxiybooks.R
+import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.databinding.ScreenSplashBinding
 import uz.developers.asaxiybooks.presenter.activity.MainActivity
 import uz.developers.asaxiybooks.presenter.viewModel.SplashViewModel
@@ -22,7 +23,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SplashScreen : Fragment(R.layout.screen_splash) {
     private val viewModel by viewModels<SplashViewModelImpl>()
+
     private val binding by viewBinding ( ScreenSplashBinding::bind )
+
+
+
+
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +46,7 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
             if(bool) {
                 findNavController().navigate(R.id.action_splashScreen_to_introScreen)
             }else{
-                findNavController().navigate(R.id.action_splashScreen_to_homeScreen)
+                findNavController().navigate(R.id.action_splashScreen_to_loginScreen)
             }
         }
 
