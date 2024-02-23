@@ -41,6 +41,11 @@
         <action
             android:id="@+id/action_homeScreen_to_musicDetalScreen"
             app:destination="@id/musicDetalScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:popUpTo="@id/homeScreen"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         tools:layout="@layout/screen_intro"
@@ -78,7 +83,9 @@
         android:label="LoginScreen" >
         <action
             android:id="@+id/action_loginScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/loginScreen"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginScreen_to_signUpScreen"
             app:destination="@id/signUpScreen" />
@@ -90,7 +97,9 @@
         android:label="SignUpScreen" >
         <action
             android:id="@+id/action_signUpScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/signUpScreen"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signUpScreen_to_loginScreen"
             app:destination="@id/loginScreen" />
