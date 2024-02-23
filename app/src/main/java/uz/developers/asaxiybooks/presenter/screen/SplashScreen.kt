@@ -42,11 +42,13 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
 
 
 
-        viewModel.navigateToScreen.observe(viewLifecycleOwner) { bool ->
-            if(bool) {
+        viewModel.navigateToScreen.observe(viewLifecycleOwner) { value ->
+            if(value==0) {
                 findNavController().navigate(R.id.action_splashScreen_to_introScreen)
-            }else{
+            }else if (value==1){
                 findNavController().navigate(R.id.action_splashScreen_to_loginScreen)
+            }else{
+                findNavController().navigate(R.id.action_splashScreen_to_homeScreen2)
             }
         }
 

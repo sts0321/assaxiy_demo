@@ -17,13 +17,16 @@ import kotlinx.coroutines.flow.onEach
 import ru.ldralighieri.corbind.widget.textChanges
 import uz.developers.asaxiybooks.R
 import uz.developers.asaxiybooks.data.model.CreateAccount
+import uz.developers.asaxiybooks.data.model.UserData
+import uz.developers.asaxiybooks.data.sourse.Pref
+import uz.developers.asaxiybooks.data.sourse.PrefImpl
 import uz.developers.asaxiybooks.databinding.ScreenSingupBinding
 import uz.developers.asaxiybooks.presenter.viewModel.SignInViewModel
 import uz.developers.asaxiybooks.presenter.viewModel.impl.SignInViewModelImpl
 
 @AndroidEntryPoint
 class SignUpScreen : Fragment(R.layout.screen_singup){
-
+    private val myShar:Pref=PrefImpl(requireContext())
     private val binding by viewBinding(ScreenSingupBinding::bind)
 
     private val viewModel:SignInViewModel by viewModels<SignInViewModelImpl>()
@@ -52,6 +55,7 @@ class SignUpScreen : Fragment(R.layout.screen_singup){
             val lastName = binding.lastNameEditText.text.toString()
             val gmail = binding.editGmailText.text.toString()
             val password = binding.editPasswordText.text.toString()
+            myShar.setUserInfo(UserData(firstName, lastName, password, gmail))
             viewModel.createAccount(CreateAccount( firstName = firstName,lastName = lastName,gmail = gmail, password = password))
         }
 

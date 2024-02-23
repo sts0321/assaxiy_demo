@@ -1,5 +1,7 @@
 package uz.developers.asaxiybooks.data.sourse
 
+import uz.developers.asaxiybooks.data.model.UserData
+
 interface Pref {
     fun isFirstTime(): Boolean
     fun setFirstTime(isFirstTime: Boolean)
@@ -10,4 +12,6 @@ interface Pref {
     fun setLogIn(boolean: Boolean)
 
     fun getLogIn():Boolean
+    fun setUserInfo(user: UserData)
+    fun getUserInfo():UserData
 }

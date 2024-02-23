@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModelImpl @Inject constructor(private val pref: Pref) : ViewModel() {
 
-    val navigateToScreen = MutableLiveData<Boolean>()
+    val navigateToScreen = MutableLiveData<Int>()
 
     init {
         determineInitialScreen()
@@ -23,11 +23,14 @@ class SplashViewModelImpl @Inject constructor(private val pref: Pref) : ViewMode
         viewModelScope.launch {
             delay(1500)
             val isFirstTime = pref.isFirstTime()
+            val isLogin = pref.getUserInfo().gmail==""
             if (isFirstTime) {
-                navigateToScreen.value = true
+                navigateToScreen.value = 0
                 pref.setFirstTime(false)
-            } else {
-                navigateToScreen.value = false
+            } else if (isLogin) {
+                navigateToScreen.value = 1
+            }else{
+                navigateToScreen.value=2
             }
         }
     }
