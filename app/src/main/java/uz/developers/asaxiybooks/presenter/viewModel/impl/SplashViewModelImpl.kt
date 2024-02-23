@@ -1,7 +1,6 @@
 package uz.developers.asaxiybooks.presenter.viewModel.impl
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,7 +22,7 @@ class SplashViewModelImpl @Inject constructor(private val pref: Pref) : ViewMode
         viewModelScope.launch {
             delay(1500)
             val isFirstTime = pref.isFirstTime()
-            val isLogin = pref.getUserInfo().gmail==""
+            val isLogin = pref.getUserInfo().gmail ==""
             if (isFirstTime) {
                 navigateToScreen.value = 0
                 pref.setFirstTime(false)
