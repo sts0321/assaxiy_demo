@@ -23,6 +23,7 @@ import uz.developers.asaxiybooks.data.sourse.PrefImpl
 import uz.developers.asaxiybooks.databinding.ScreenSingupBinding
 import uz.developers.asaxiybooks.presenter.viewModel.SignInViewModel
 import uz.developers.asaxiybooks.presenter.viewModel.impl.SignInViewModelImpl
+import java.util.UUID
 
 @AndroidEntryPoint
 class SignUpScreen : Fragment(R.layout.screen_singup){
@@ -55,8 +56,9 @@ class SignUpScreen : Fragment(R.layout.screen_singup){
             val lastName = binding.lastNameEditText.text.toString()
             val gmail = binding.editGmailText.text.toString()
             val password = binding.editPasswordText.text.toString()
-            myShar.setUserInfo(UserData(, firstName, lastName, password, gmail))
-            viewModel.createAccount(CreateAccount( firstName = firstName,lastName = lastName,gmail = gmail, password = password))
+            val id=UUID.randomUUID().toString()
+            myShar.setUserInfo(UserData(id, firstName, lastName, password, gmail))
+            viewModel.createAccount(CreateAccount( id = id, firstName = firstName,lastName = lastName,gmail = gmail, password = password))
         }
 
         viewModel.messageFlow

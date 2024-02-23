@@ -173,7 +173,7 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
 
     override fun createAccount(createAccount: CreateAccount): Flow<Result<Unit>> = callbackFlow {
        fireStore.collection("user")
-           .add(createAccount)
+           .document(createAccount.id).set(createAccount)
            .addOnSuccessListener{
                trySend(Result.success(Unit))
            }

@@ -38,6 +38,7 @@ class PrefImpl @Inject constructor(
 
     override fun setUserInfo(user:UserData){
         sharedPreferences.edit().putString("firstName",user.firstName).apply()
+        sharedPreferences.edit().putString("id",user.id).apply()
         sharedPreferences.edit().putString("lastName",user.lastName).apply()
         sharedPreferences.edit().putString("gmail",user.gmail).apply()
         sharedPreferences.edit().putString("password",user.password).apply()
@@ -48,7 +49,8 @@ class PrefImpl @Inject constructor(
         val lastName=sharedPreferences.getString("lastName","Ali")?:""
         val gmail=sharedPreferences.getString("gmail","")?:""
         val password=sharedPreferences.getString("password","")?:""
-        return UserData(, firstName, lastName, password, gmail)
+        val id=sharedPreferences.getString("id","")?:""
+        return UserData(id, firstName, lastName, password, gmail)
     }
 }
 
