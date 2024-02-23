@@ -44,7 +44,7 @@ class AudioLibraryScreen:Fragment(R.layout.screen_audio_library) {
 
         adapter.setOnClickBook {
             "click".myLog()
-            findNavController().navigate(HomeScreenDirections.actionHomeScreenToMusicDetalScreen())
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToMusicDetalScreen(it))
         }
     }
 }

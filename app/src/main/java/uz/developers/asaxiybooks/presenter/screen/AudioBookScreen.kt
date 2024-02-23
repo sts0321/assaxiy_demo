@@ -1,5 +1,6 @@
 package uz.developers.asaxiybooks.presenter.screen
 
+import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
@@ -7,36 +8,51 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.example.nasiyaapp.utils.myLog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import uz.developers.asaxiybooks.R
+import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.databinding.ScreenAudioBookBinding
-
+import java.io.File
+import javax.inject.Inject
+@AndroidEntryPoint
 class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
     private val binding by viewBinding(ScreenAudioBookBinding::bind)
     private var isPlaying = true
-
     private lateinit var seekBar:SeekBar
-
     private var audioBook: MediaPlayer? = null
-    private val currentAudioBook = R.raw.music
+    private val navArgs=navArgs<AudioBookScreenArgs>()
+    private val audio by lazy { navArgs.value.audioBook }
+    @Inject
+    lateinit var shar:Pref
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         seekBar = binding.seekBar
-        controllerSound(currentAudioBook)
-
+        init()
+        controllerSound()
     }
 
-    private fun controllerSound(audioResourceId: Int) {
+    private fun controllerSound() {
+        val book = File(shar.getBookLink(bookId = audio.id))
         binding.playBtn.setOnClickListener {
             if (audioBook == null) {
-                audioBook = MediaPlayer.create(requireContext(), Uri.parse("https://firebasestorage.googleapis.com/v0/b/asaxiy-books-92d0e.appspot.com/o/mp3%2FThe%20Kid%20Laroi%20-%20Stay%20(feat.%20Justin%20Bieber).mp3?alt=media&token=b5314992-3463-4550-bf12-c4de54bc786d"))
+                audioBook = MediaPlayer.create(requireContext(), Uri.fromFile(book))
                 audioBook?.setOnCompletionListener {
                     stopPlaying()
                 }
@@ -136,5 +152,43 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
         finalTimerString = "$finalTimerString$minutes:$secondsString"
 
         return finalTimerString
+    }
+    fun init(){
+        binding.apply {
+            Glide.with(requireContext())
+                .load(audio.bookPicture[0])
+                .listener(object :RequestListener<Drawable>{
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        "${e?.message}".myLog()
+                        "${e?.message} error".myLog()
+                        bookImage.setImageResource(R.drawable.audio_book)
+                       return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                })
+                .into(bookImage)
+            musicName.text=audio.bookName
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        audioBook?.stop()
+        audioBook=null
     }
 }
