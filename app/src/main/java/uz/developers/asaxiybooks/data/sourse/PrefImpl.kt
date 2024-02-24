@@ -66,6 +66,24 @@ class PrefImpl @Inject constructor(
         }
         return UserData(id, firstName, lastName, password, gmail,list)
     }
+
+    override fun getDownlandBookId(): ArrayList<String> {
+        val size=sharedPreferences.getInt("booksIdSize",0)
+        val data=ArrayList<String>(size)
+        for (i in 0..<size){
+            data.add(sharedPreferences.getString("bookId$i","")?:"")
+        }
+        return data
+    }
+
+    override fun setDownlandBookId(bookId: String) {
+        val list=getDownlandBookId()
+        list.add(bookId)
+        sharedPreferences.edit().putInt("booksIdSize",list.size).apply()
+        for (i in 0..<list.size){
+            sharedPreferences.edit().putString("bookId$i",list[i]).apply()
+        }
+    }
 }
 
 

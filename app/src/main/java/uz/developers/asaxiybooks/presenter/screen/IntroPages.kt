@@ -16,7 +16,6 @@ class IntroPages() : Fragment(R.layout.page_intro) {
         super.onViewCreated(view, savedInstanceState)
         val pos = requireArguments().getInt("POS", 0)
 
-        "pages intro".myLog()
         when (pos) {
             0 -> {
 

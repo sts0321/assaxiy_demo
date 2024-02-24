@@ -96,8 +96,8 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
             Firebase.storage.getReferenceFromUrl(audioBookData.file)
                 .getFile(book)
                 .addOnSuccessListener {
-                    book.parent.myLog()
                     shar.setBookInfo(bookId = audioBookData.id, bookLink = "${book.parent}/${book.name}")
+                    shar.setDownlandBookId(bookId = audioBookData.id)
                     Log.d("TTT", "OnSuccess")
 
                     binding.apply {
@@ -111,7 +111,6 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
                     }
                 }
                 .addOnFailureListener{
-                    "${it.message}".myLog()
                     binding.apply {
                         seekBar.visibility= View.GONE
                         progres.visibility= View.GONE

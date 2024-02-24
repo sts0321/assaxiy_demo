@@ -79,4 +79,53 @@ class BooksRepositoryImpl @Inject constructor(private val pref: Pref) : BooksRep
             }
         awaitClose()
     }
+
+    override fun getBooksForDownland(): Flow<Result<List<MyBooksData>>> = callbackFlow{
+       val list=pref.getDownlandBookId()
+        if (list.size==0){
+            trySend(Result.success(emptyList()))
+            channel.close()
+        }
+        val data=ArrayList<MyBooksData>()
+        val size=list.size
+        var index=0
+        list.forEach {
+            fireStore.collection("'books")
+                .document(it)
+                .get().addOnSuccessListener {
+                    index++
+                    if (it.data!=null){
+                        val description=(it.data!!.getOrDefault("description","")?:"").toString()
+                        val coverImage=it.data!!.getOrDefault("coverImage", arrayListOf("")) as List<String>
+                        val author=(it.data!!.getOrDefault("author", "")?:"Ali").toString()
+                        val totalSize=(it.data!!.getOrDefault("total size","10 mb")?:"12 mb").toString()
+                        val file=(it.data!!.getOrDefault("filePath","")?:"").toString()
+                        val name=(it.data!!.getOrDefault("name","")?:"").toString()
+                        val type=(it.data!!.getOrDefault("type","mp3")?:"mp3").toString()
+                        data.add(
+                            MyBooksData(
+                                id=it.id,
+                                bookName = name,
+                                bookAuthor = author,
+                                bookSize = totalSize,
+                                bookPicture =coverImage,
+                                descriptions =description,
+                                type = type,
+                                file = file
+                            )
+                        )
+                    }
+                    if (index==size){
+                        trySend(Result.success(data))
+                        channel.close()
+                    }
+                }
+                .addOnFailureListener {
+                    index++
+                    trySend(Result.failure(it))
+                    channel.close()
+                }
+        }
+        awaitClose()
+    }
 }

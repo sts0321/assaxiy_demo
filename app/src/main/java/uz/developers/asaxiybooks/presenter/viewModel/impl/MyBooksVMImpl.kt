@@ -2,6 +2,7 @@ package uz.developers.asaxiybooks.presenter.viewModel.impl
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nasiyaapp.utils.myLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -19,8 +20,16 @@ class MyBooksVMImpl @Inject constructor(
     val booksRepository: BooksRepository
 ):ViewModel(),MyBooksVM {
     override fun getBooks(): Flow<Result<List<MyBooksData>>> = callbackFlow{
-        booksRepository.getBooksFromUser().onEach {
-            trySend(Result.success(it))
+        booksRepository.getBooksForDownland().onEach {
+            it.onSuccess {
+                "ohayo".myLog()
+                trySend(Result.success(it))
+                channel.close()
+            }
+            it.onFailure {
+                trySend(Result.failure(it))
+                channel.close()
+            }
         }.launchIn(viewModelScope)
         awaitClose()
     }

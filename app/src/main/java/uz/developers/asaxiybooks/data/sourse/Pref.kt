@@ -14,4 +14,6 @@ interface Pref {
     fun getLogIn():Boolean
     fun setUserInfo(user: UserData)
     fun getUserInfo():UserData
+    fun getDownlandBookId():List<String>
+    fun setDownlandBookId(bookId:String)
 }
