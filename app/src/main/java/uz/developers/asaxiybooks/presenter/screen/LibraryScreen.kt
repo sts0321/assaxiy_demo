@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.nasiyaapp.utils.myLog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -49,7 +48,6 @@ class LibraryScreen : Fragment(R.layout.screen_library) {
         }.flowWithLifecycle(lifecycle).launchIn(lifecycleScope)
 
         adapter.setOnClickBook {
-            "click".myLog()
             findNavController().navigate(HomeScreenDirections.actionHomeScreenToBookDetailScreen(it))
         }
         adapter.setOnClickCategory {

@@ -38,7 +38,6 @@ class ReadBookScreen:Fragment(R.layout.screen_pdfreader) {
             .defaultPage(0)
             .onError {
                 Toast.makeText(requireContext(),it.message?:"",Toast.LENGTH_SHORT).show()
-                "${it.message } ${shar.getBookLink(bookId = bookData.id)}".myLog()
             }
             .load()
         binding.back.setOnClickListener {

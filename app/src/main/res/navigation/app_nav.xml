@@ -24,7 +24,7 @@
         <action
             android:id="@+id/action_splashScreen_to_homeScreen2"
             app:destination="@id/homeScreen"
-            app:popUpTo="@id/homeScreen"
+            app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

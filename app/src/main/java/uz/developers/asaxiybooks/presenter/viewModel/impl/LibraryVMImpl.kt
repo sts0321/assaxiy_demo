@@ -34,15 +34,12 @@ class LibraryVMImpl @Inject constructor(
             val data=ArrayList<CategoryBooksData>()
         appRepository.getCategoryBooks().onEach { result->
            result.onSuccess { list->
-               "salom".myLog()
                val size=list.size
                var index=0
-               "$size size".myLog()
                list.forEach {
                    appRepository.getBooksInCategory(it.first,TypeEnum.PDF).onEach { res->
                        res.onSuccess { myBooks->
                            index++
-                           "$index index".myLog()
                            if (myBooks.size!=0){
                                data.add(CategoryBooksData(it.first,it.second,myBooks))
                            }
@@ -52,7 +49,6 @@ class LibraryVMImpl @Inject constructor(
                        }
                        res.onFailure {
                            trySend(Result.failure(it))
-                           "my log".myLog()
                        }
 
 
@@ -71,7 +67,6 @@ class LibraryVMImpl @Inject constructor(
 
     override  fun onClickItem(name: String, link: String) {
         viewModelScope.launch {
-            "salom dunyo".myLog()
 //            appNavigator.navigateTo(HomeScreenDirections.actionHomeScreenToReadBookScreen())
 //            appNavigator.navigateTo(R.id.action_homeScreen_to_readBookScreen)
         }

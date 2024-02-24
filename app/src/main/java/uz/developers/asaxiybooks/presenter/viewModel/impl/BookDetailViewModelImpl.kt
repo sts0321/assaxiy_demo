@@ -23,7 +23,6 @@ class BookDetailViewModelImpl @Inject constructor(
             booksRepository.setBookFromUser(bookId).onEach {
                 it.onSuccess {
                     counter++
-                    "success".myLog()
                     trySend(Result.success(Unit))
                     channel.close()
                 }

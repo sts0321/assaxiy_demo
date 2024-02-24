@@ -166,8 +166,6 @@ class AudioBookScreen : Fragment(R.layout.screen_audio_book) {
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        "${e?.message}".myLog()
-                        "${e?.message} error".myLog()
                         bookImage.setImageResource(R.drawable.audio_book)
                        return false
                     }

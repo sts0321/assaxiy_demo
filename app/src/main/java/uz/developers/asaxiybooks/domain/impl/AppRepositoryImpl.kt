@@ -1,6 +1,5 @@
 package uz.developers.asaxiybooks.domain.impl
 
-import com.example.nasiyaapp.utils.myLog
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
@@ -156,16 +155,18 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                    try{
                        val books=(it.data.getOrDefault("books", listOf(""))?: arrayListOf<String>()) as ArrayList<String>
                        pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,books))
-
+                       trySend(Result.success(Unit))
+                       channel.close()
+                       pref.setLogIn(true)
                    }catch (e:ClassCastException){
                        pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,
                            arrayListOf()
                        ))
+                       trySend(Result.success(Unit))
+                       channel.close()
+                       pref.setLogIn(true)
                    }
 
-                   trySend(Result.success(Unit))
-                   channel.close()
-                   pref.setLogIn(true)
                }
                trySend(Result.failure(Throwable("Bunaka user yo'q!!")))
                channel.close()

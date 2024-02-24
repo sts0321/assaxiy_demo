@@ -92,8 +92,8 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
             Firebase.storage.getReferenceFromUrl(bookData.file)
                 .getFile(book)
                 .addOnSuccessListener {
-                    book.parent.myLog()
                     shar.setBookInfo(bookId = bookData.id, bookLink = "${book.parent}/${book.name}")
+                    shar.setDownlandBookId(bookId = bookData.id)
                     Log.d("TTT", "OnSuccess")
 
                     binding.apply {
@@ -107,7 +107,6 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
                     }
                 }
                 .addOnFailureListener{
-                    "${it.message}".myLog()
                     binding.apply {
                         seekBar.visibility=View.GONE
                         progres.visibility=View.GONE
