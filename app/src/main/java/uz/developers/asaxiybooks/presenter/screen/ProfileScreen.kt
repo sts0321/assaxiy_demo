@@ -39,6 +39,8 @@ class ProfileScreen : Fragment(R.layout.screen_profile) {
         binding.shoppingHistory.setOnClickListener{
             findNavController().navigate(HomeScreenDirections.actionHomeScreenToHistoryScreen())
         }
+
+
     }
 
     private fun dialogLogOut() {

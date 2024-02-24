@@ -140,5 +140,12 @@
     <fragment
         android:id="@+id/historyScreen"
         android:name="uz.developers.asaxiybooks.presenter.screen.HistoryScreen"
-        android:label="HistoryScreen" />
+        android:label="HistoryScreen" >
+        <action
+            android:id="@+id/action_historyScreen_to_musicDetalScreen"
+            app:destination="@id/musicDetalScreen" />
+        <action
+            android:id="@+id/action_historyScreen_to_bookDetailScreen"
+            app:destination="@id/bookDetailScreen" />
+    </fragment>
 </navigation>
