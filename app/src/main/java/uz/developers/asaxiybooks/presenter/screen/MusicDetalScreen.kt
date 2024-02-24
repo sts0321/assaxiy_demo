@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.nasiyaapp.utils.myLog
 import com.google.firebase.Firebase
+import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.storage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -86,6 +87,7 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
         binding.seekBar.visibility= View.GONE
         binding.progres.visibility= View.GONE
     }
+    lateinit var downland: FileDownloadTask
     fun initButton(){
         binding.download.text="Yuklash"
         binding.download.setOnClickListener {
@@ -93,8 +95,10 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
             binding.progres.visibility= View.VISIBLE
             binding.download.visibility= View.INVISIBLE
             val book = File.createTempFile(audioBookData.bookName, ".${audioBookData.type}")
-            Firebase.storage.getReferenceFromUrl(audioBookData.file)
+            downland=Firebase.storage.getReferenceFromUrl(audioBookData.file)
                 .getFile(book)
+
+                downland
                 .addOnSuccessListener {
                     shar.setBookInfo(bookId = audioBookData.id, bookLink = "${book.parent}/${book.name}")
                     shar.setDownlandBookId(bookId = audioBookData.id)
@@ -123,5 +127,10 @@ class MusicDetalScreen : Fragment(R.layout.screen_music_detal) {
                     binding.seekBar.setProgress(prot.toInt())
                 }
         }
+    }
+
+    override fun onStop() {
+        downland.pause()
+        super.onStop()
     }
 }
