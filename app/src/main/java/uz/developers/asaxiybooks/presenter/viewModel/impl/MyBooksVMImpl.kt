@@ -22,7 +22,6 @@ class MyBooksVMImpl @Inject constructor(
     override fun getBooks(): Flow<Result<List<MyBooksData>>> = callbackFlow{
         booksRepository.getBooksForDownland().onEach {
             it.onSuccess {
-                "ohayo".myLog()
                 trySend(Result.success(it))
                 channel.close()
             }
