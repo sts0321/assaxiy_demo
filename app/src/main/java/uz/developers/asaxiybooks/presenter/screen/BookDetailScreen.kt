@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.nasiyaapp.utils.myLog
 import com.google.firebase.Firebase
+import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.storage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -24,6 +25,7 @@ import uz.developers.asaxiybooks.databinding.ScreenDetailBinding
 import uz.developers.asaxiybooks.presenter.viewModel.BookDetailViewModel
 import uz.developers.asaxiybooks.presenter.viewModel.impl.BookDetailViewModelImpl
 import java.io.File
+import java.lang.Exception
 import javax.inject.Inject
 @AndroidEntryPoint
 class BookDetailScreen : Fragment(R.layout.screen_detail) {
@@ -82,6 +84,7 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
         binding.seekBar.visibility=View.GONE
         binding.progres.visibility=View.GONE
     }
+    lateinit var downland: FileDownloadTask
     fun initButton(){
         binding.download.text="Yuklash"
         binding.download.setOnClickListener {
@@ -89,8 +92,10 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
             binding.progres.visibility=View.VISIBLE
             binding.download.visibility=View.INVISIBLE
             val book = File.createTempFile(bookData.bookName, ".${bookData.type}")
-            Firebase.storage.getReferenceFromUrl(bookData.file)
+           downland= Firebase.storage.getReferenceFromUrl(bookData.file)
                 .getFile(book)
+
+                downland
                 .addOnSuccessListener {
                     shar.setBookInfo(bookId = bookData.id, bookLink = "${book.parent}/${book.name}")
                     shar.setDownlandBookId(bookId = bookData.id)
@@ -119,5 +124,21 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
                     binding.seekBar.setProgress(prot.toInt())
                 }
         }
+    }
+
+    override fun onStop() {
+        downland.pause()
+        super.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            downland.resume()
+        }catch (ignore:Exception){}
+    }
+    override fun onDestroyView() {
+
+        super.onDestroyView()
     }
 }
