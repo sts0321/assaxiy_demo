@@ -3,7 +3,6 @@
     <style name="Base.Theme.AsaxiyBooks" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.AsaxiyBooks" parent="Base.Theme.AsaxiyBooks" />
