@@ -13,6 +13,7 @@ import uz.developers.asaxiybooks.data.model.TypeEnum
 import uz.developers.asaxiybooks.data.model.UserData
 import uz.developers.asaxiybooks.data.sourse.Pref
 import uz.developers.asaxiybooks.domain.AppRepository
+import java.lang.ClassCastException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -80,10 +81,8 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
             .get().addOnSuccessListener {
                 val size=it.size()
                 var index=0
-                "$size v".myLog()
                 it.forEach {
                     index++
-                    "$index vm".myLog()
                     data.add(Pair(it.id,it.data.getOrDefault("name","Ali").toString()))
                     if (size==index){
                         trySend(Result.success(data))
@@ -104,13 +103,11 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
             TypeEnum.PDF-> "pdf"
             TypeEnum.MP3->"mp3"
         }
-        "$categoryId categoryId".myLog()
         fireStore.collection("books")
             .whereEqualTo("categoryId",categoryId)
             .whereEqualTo("type",type1)
             .get().addOnSuccessListener { query->
                 val size=query.size()
-                "$size size1".myLog()
                 query.forEach {
                     index++
                     val name=(it.data.getOrDefault("name","")?:"").toString()
@@ -131,7 +128,6 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                             file = file
                         )
                     )
-                    "$index indexV".myLog()
                     if (index==size){
 
                     }
@@ -157,8 +153,16 @@ class AppRepositoryImpl @Inject constructor(private val pref: Pref) : AppReposit
                    val lastName=it.data.getOrDefault("lastName","Ali").toString()
                    val gmail=it.data.getOrDefault("gmail","Ali").toString()
                    val password=it.data.getOrDefault("password","Ali").toString()
-                   val books=it.data.getOrDefault("books", listOf(""))as ArrayList<String>
-                   pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,books))
+                   try{
+                       val books=(it.data.getOrDefault("books", listOf(""))?: arrayListOf<String>()) as ArrayList<String>
+                       pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,books))
+
+                   }catch (e:ClassCastException){
+                       pref.setUserInfo(UserData(it.id, firstName, lastName, password, gmail,
+                           arrayListOf()
+                       ))
+                   }
+
                    trySend(Result.success(Unit))
                    channel.close()
                    pref.setLogIn(true)

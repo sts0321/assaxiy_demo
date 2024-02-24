@@ -20,6 +20,7 @@
         android:layout_marginBottom="16dp"/>
     <TextView
         app:layout_constraintTop_toTopOf="@id/book_image"
+        app:layout_constraintBottom_toTopOf="@id/author_name"
         android:id="@+id/book_name"
         android:textStyle="bold"
         android:maxWidth="150sp"
@@ -29,25 +30,22 @@
         app:layout_constraintStart_toEndOf="@id/book_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
     <TextView
         android:id="@+id/book_price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="180dp"
-        android:text="19 990 so'm"
-        android:textColor="#0587EB"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/author_name"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/author_name"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
+        app:layout_constraintStart_toEndOf="@id/book_image"
+        app:layout_constraintBottom_toBottomOf="@id/book_image"
+        android:textColor="#0587EB"
+        android:textStyle="bold"
+        android:text="19 990 so'm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <TextView
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@id/book_image"
         app:layout_constraintTop_toBottomOf="@id/book_name"
+        app:layout_constraintBottom_toTopOf="@id/book_price"
         android:id="@+id/author_name"
         android:textColor="@color/black"
         android:textSize="14sp"

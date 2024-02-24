@@ -41,18 +41,20 @@ class BookDetailScreen : Fragment(R.layout.screen_detail) {
                 binding.progressBar.visibility=View.VISIBLE
                 binding.progresBth.visibility=View.VISIBLE
                 binding.download.visibility=View.INVISIBLE
-                "heheheheheheheh".myLog()
+                binding.download.isClickable=false
                 viewModel.setBookInUser(bookData.id).onEach {
                     it.onSuccess {
                         initButton()
                         binding.progresBth.visibility=View.INVISIBLE
                         binding.progresBth.visibility=View.INVISIBLE
                         binding.download.visibility=View.VISIBLE
+                        binding.download.isClickable=true
                     }
                     it.onFailure {
                         binding.progresBth.visibility=View.INVISIBLE
                         binding.progresBth.visibility=View.INVISIBLE
                         binding.download.visibility=View.VISIBLE
+                        binding.download.isClickable=true
                     }
                 }.flowWithLifecycle(lifecycle).launchIn(lifecycleScope)
             }
